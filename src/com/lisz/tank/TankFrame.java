@@ -36,13 +36,52 @@ public class TankFrame extends Frame {
 	}
 	
 	private class MyKeyListener extends KeyAdapter {
+		
+		private boolean bL = false;
+		private boolean bU = false;
+		private boolean bR = false;
+		private boolean bD = false;
+		
 		@Override
 		public void keyPressed(KeyEvent e) {
 			switch (e.getKeyCode()) {
-			case KeyEvent.VK_UP: y -= 10; break;
-			case KeyEvent.VK_DOWN: y += 10; break;
-			case KeyEvent.VK_LEFT: x -= 10; break;
-			case KeyEvent.VK_RIGHT: x += 10; break;
+			case KeyEvent.VK_UP: bU = true; break;
+			case KeyEvent.VK_DOWN: bD = true; break;
+			case KeyEvent.VK_LEFT: bL = true; break;
+			case KeyEvent.VK_RIGHT: bR = true; break;
+			default:
+				break;
+			}
+			if (bD && !bU && !bR && !bL) {
+				y += 10;
+			} else if (!bD && bU && !bR && !bL) {
+				y -= 10;
+			} else if (!bD && !bU && bR && !bL) {
+				x += 10;
+			} else if (!bD && !bU && !bR && bL) {
+				x -= 10;
+			} else if (!bD && bU && !bR && bL) {
+				x -= 10;
+				y -= 10;
+			} else if (!bD && bU && bR && !bL) {
+				x += 10;
+				y -= 10;
+			} else if (bD && !bU && bR && !bL) {
+				x += 10;
+				y += 10;
+			} else if (bD && !bU && !bR && bL) {
+				x -= 10;
+				y += 10;
+			}
+		}
+		
+		@Override
+		public void keyReleased(KeyEvent e) {
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_UP: bU = false; break;
+			case KeyEvent.VK_DOWN: bD = false; break;
+			case KeyEvent.VK_LEFT: bL = false; break;
+			case KeyEvent.VK_RIGHT: bR = false; break;
 			default:
 				break;
 			}
