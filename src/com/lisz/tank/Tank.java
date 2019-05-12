@@ -1,9 +1,13 @@
 package com.lisz.tank;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class Tank implements GameObject {
 	private int x = 200;
 	private int y = 200;
 	private Dir dir = Dir.UP;
+	private TankFrame tf;
 	
 	private static final int SPEED = 10;
 	private boolean bL = false;
@@ -11,6 +15,15 @@ public class Tank implements GameObject {
 	private boolean bR = false;
 	private boolean bD = false;
 
+	public Tank() {}
+	
+	public Tank (int x, int y, Dir dir, TankFrame tf) {
+		this.x = x;
+		this.y = y;
+		this.dir = dir;
+		this.tf = tf;
+	}
+	
 	@Override
 	public void move() {
 		switch (dir) {
@@ -76,6 +89,14 @@ public class Tank implements GameObject {
 
 	public void setbD(boolean bD) {
 		this.bD = bD;
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		g.setColor(new Color(255, 255, 255));
+		g.fillRect(0, 0, tf.getWidth(), tf.getHeight());
+		g.setColor(new Color(0, 0, 0));
+		g.fillRect(x, y, 50, 50);
 	}
 
 }

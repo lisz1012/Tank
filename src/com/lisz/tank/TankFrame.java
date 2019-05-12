@@ -1,6 +1,5 @@
 package com.lisz.tank;
 
-import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
@@ -10,7 +9,8 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
 	private static final long serialVersionUID = 1L;
-	private GameObject tank = new Tank();
+	private GameObject tank = new Tank(200, 200, Dir.UP, this);
+	
 	
 	public TankFrame() {
 		setSize(800, 600);
@@ -28,10 +28,7 @@ public class TankFrame extends Frame {
 	
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(new Color(255, 255, 255));
-		g.fillRect(0, 0, getWidth(), getHeight());
-		g.setColor(new Color(0, 0, 0));
-		g.fillRect(tank.getX(), tank.getY(), 50, 50);
+		tank.paint(g);
 	}
 	
 	private class MyKeyListener extends KeyAdapter {

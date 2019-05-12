@@ -1,5 +1,7 @@
 package com.lisz.tank;
 
+import java.awt.Graphics;
+
 public interface GameObject {
 	void move();
 	void setMainTankDir();
@@ -9,4 +11,5 @@ public interface GameObject {
 	public void setbU(boolean bU);
 	public void setbR(boolean bR);
 	public void setbD(boolean bD);
+	void paint(Graphics g);
 }
