@@ -12,7 +12,8 @@ public class TankFrame extends Frame {
 	
 	int x = 200;
 	int y = 200;
-
+	Dir dir = Dir.UP;
+	
 	public TankFrame() {
 		setSize(800, 600);
 		setResizable(false);
@@ -36,7 +37,7 @@ public class TankFrame extends Frame {
 	}
 	
 	private class MyKeyListener extends KeyAdapter {
-		
+		private static final int SPEED = 10;
 		private boolean bL = false;
 		private boolean bU = false;
 		private boolean bR = false;
@@ -49,32 +50,45 @@ public class TankFrame extends Frame {
 			case KeyEvent.VK_DOWN: bD = true; break;
 			case KeyEvent.VK_LEFT: bL = true; break;
 			case KeyEvent.VK_RIGHT: bR = true; break;
-			default:
-				break;
 			}
-			if (bD && !bU && !bR && !bL) {
-				y += 10;
-			} else if (!bD && bU && !bR && !bL) {
-				y -= 10;
-			} else if (!bD && !bU && bR && !bL) {
-				x += 10;
-			} else if (!bD && !bU && !bR && bL) {
-				x -= 10;
-			} else if (!bD && bU && !bR && bL) {
-				x -= 10;
-				y -= 10;
-			} else if (!bD && bU && bR && !bL) {
-				x += 10;
-				y -= 10;
-			} else if (bD && !bU && bR && !bL) {
-				x += 10;
-				y += 10;
-			} else if (bD && !bU && !bR && bL) {
-				x -= 10;
-				y += 10;
-			}
+			
+			setMainTankDir();
+			move(dir);
 		}
 		
+		private void move(Dir dir) {
+			switch (dir) {
+			case DOWN: y += SPEED; break;
+			case UP: y -= SPEED; break;
+			case LEFT: x -= SPEED; break;
+			case RIGHT: x += SPEED; break;
+			case LEFT_UP: x -= SPEED; y -= SPEED; break;
+			case RIGHT_UP: x += SPEED; y -= SPEED; break;
+			case RIGHT_DOWN: x += SPEED; y += SPEED; break;
+			case LEFT_DOWN: x -= SPEED; y += SPEED; break;
+			}
+		}
+
+		private void setMainTankDir() {
+			if (bD && !bU && !bR && !bL) {
+				dir = Dir.DOWN;
+			} else if (!bD && bU && !bR && !bL) {
+				dir = Dir.UP;
+			} else if (!bD && !bU && bR && !bL) {
+				dir = Dir.RIGHT;
+			} else if (!bD && !bU && !bR && bL) {
+				dir = Dir.LEFT;
+			} else if (!bD && bU && !bR && bL) {
+				dir = Dir.LEFT_UP;
+			} else if (!bD && bU && bR && !bL) {
+				dir = Dir.RIGHT_UP;
+			} else if (bD && !bU && bR && !bL) {
+				dir = Dir.RIGHT_DOWN;
+			} else if (bD && !bU && !bR && bL) {
+				dir = Dir.LEFT_DOWN;
+			} 
+		}
+
 		@Override
 		public void keyReleased(KeyEvent e) {
 			switch (e.getKeyCode()) {
@@ -82,9 +96,9 @@ public class TankFrame extends Frame {
 			case KeyEvent.VK_DOWN: bD = false; break;
 			case KeyEvent.VK_LEFT: bL = false; break;
 			case KeyEvent.VK_RIGHT: bR = false; break;
-			default:
-				break;
 			}
+			
+			setMainTankDir();
 		}
 	}
 }
