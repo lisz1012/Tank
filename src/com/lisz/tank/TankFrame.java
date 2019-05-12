@@ -9,10 +9,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
-	
-	int x = 200;
-	int y = 200;
-	Dir dir = Dir.UP;
+	private static final long serialVersionUID = 1L;
+	private GameObject tank = new Tank();
 	
 	public TankFrame() {
 		setSize(800, 600);
@@ -33,72 +31,34 @@ public class TankFrame extends Frame {
 		g.setColor(new Color(255, 255, 255));
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(new Color(0, 0, 0));
-		g.fillRect(x, y, 50, 50);
+		g.fillRect(tank.getX(), tank.getY(), 50, 50);
 	}
 	
 	private class MyKeyListener extends KeyAdapter {
-		private static final int SPEED = 10;
-		private boolean bL = false;
-		private boolean bU = false;
-		private boolean bR = false;
-		private boolean bD = false;
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
 			switch (e.getKeyCode()) {
-			case KeyEvent.VK_UP: bU = true; break;
-			case KeyEvent.VK_DOWN: bD = true; break;
-			case KeyEvent.VK_LEFT: bL = true; break;
-			case KeyEvent.VK_RIGHT: bR = true; break;
+			case KeyEvent.VK_UP: tank.setbU(true); break;
+			case KeyEvent.VK_DOWN: tank.setbD(true); break;
+			case KeyEvent.VK_LEFT: tank.setbL(true); break;
+			case KeyEvent.VK_RIGHT: tank.setbR(true); break;
 			}
 			
-			setMainTankDir();
-			move(dir);
-		}
-		
-		private void move(Dir dir) {
-			switch (dir) {
-			case DOWN: y += SPEED; break;
-			case UP: y -= SPEED; break;
-			case LEFT: x -= SPEED; break;
-			case RIGHT: x += SPEED; break;
-			case LEFT_UP: x -= SPEED; y -= SPEED; break;
-			case RIGHT_UP: x += SPEED; y -= SPEED; break;
-			case RIGHT_DOWN: x += SPEED; y += SPEED; break;
-			case LEFT_DOWN: x -= SPEED; y += SPEED; break;
-			}
-		}
-
-		private void setMainTankDir() {
-			if (bD && !bU && !bR && !bL) {
-				dir = Dir.DOWN;
-			} else if (!bD && bU && !bR && !bL) {
-				dir = Dir.UP;
-			} else if (!bD && !bU && bR && !bL) {
-				dir = Dir.RIGHT;
-			} else if (!bD && !bU && !bR && bL) {
-				dir = Dir.LEFT;
-			} else if (!bD && bU && !bR && bL) {
-				dir = Dir.LEFT_UP;
-			} else if (!bD && bU && bR && !bL) {
-				dir = Dir.RIGHT_UP;
-			} else if (bD && !bU && bR && !bL) {
-				dir = Dir.RIGHT_DOWN;
-			} else if (bD && !bU && !bR && bL) {
-				dir = Dir.LEFT_DOWN;
-			} 
+			tank.setMainTankDir();
+			tank.move();
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
 			switch (e.getKeyCode()) {
-			case KeyEvent.VK_UP: bU = false; break;
-			case KeyEvent.VK_DOWN: bD = false; break;
-			case KeyEvent.VK_LEFT: bL = false; break;
-			case KeyEvent.VK_RIGHT: bR = false; break;
+			case KeyEvent.VK_UP: tank.setbU(false); break;
+			case KeyEvent.VK_DOWN: tank.setbD(false); break;
+			case KeyEvent.VK_LEFT: tank.setbL(false); break;
+			case KeyEvent.VK_RIGHT: tank.setbR(false); break;
 			}
 			
-			setMainTankDir();
+			tank.setMainTankDir();
 		}
 	}
 }
