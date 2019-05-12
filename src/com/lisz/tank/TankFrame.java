@@ -32,30 +32,55 @@ public class TankFrame extends Frame {
 	}
 	
 	private class MyKeyListener extends KeyAdapter {
+		private boolean bL = false;
+		private boolean bU = false;
+		private boolean bR = false;
+		private boolean bD = false;
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
-			switch (e.getKeyCode()) {
-			case KeyEvent.VK_UP: tank.setbU(true); break;
-			case KeyEvent.VK_DOWN: tank.setbD(true); break;
-			case KeyEvent.VK_LEFT: tank.setbL(true); break;
-			case KeyEvent.VK_RIGHT: tank.setbR(true); break;
-			}
-			
-			tank.setMainTankDir();
+			setDirKeyPressedStatus(e, true);
+			Dir dir = calculateDir();
+			tank.setDir(dir);
 			tank.move();
+		}
+
+		private Dir calculateDir() {
+			Dir dir = Dir.NONE;
+			if (bD && !bU && !bR && !bL) {
+				dir = Dir.DOWN;
+			} else if (!bD && bU && !bR && !bL) {
+				dir = Dir.UP;
+			} else if (!bD && !bU && bR && !bL) {
+				dir = Dir.RIGHT;
+			} else if (!bD && !bU && !bR && bL) {
+				dir = Dir.LEFT;
+			} else if (!bD && bU && !bR && bL) {
+				dir = Dir.LEFT_UP;
+			} else if (!bD && bU && bR && !bL) {
+				dir = Dir.RIGHT_UP;
+			} else if (bD && !bU && bR && !bL) {
+				dir = Dir.RIGHT_DOWN;
+			} else if (bD && !bU && !bR && bL) {
+				dir = Dir.LEFT_DOWN;
+			} 
+			return dir;
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
+			setDirKeyPressedStatus(e, false);
+			Dir dir = calculateDir();
+			tank.setDir(dir);
+		}
+		
+		private void setDirKeyPressedStatus(KeyEvent e, boolean keyPressed) {
 			switch (e.getKeyCode()) {
-			case KeyEvent.VK_UP: tank.setbU(false); break;
-			case KeyEvent.VK_DOWN: tank.setbD(false); break;
-			case KeyEvent.VK_LEFT: tank.setbL(false); break;
-			case KeyEvent.VK_RIGHT: tank.setbR(false); break;
+			case KeyEvent.VK_UP: bU = keyPressed; break;
+			case KeyEvent.VK_DOWN: bD = keyPressed; break;
+			case KeyEvent.VK_LEFT: bL = keyPressed; break;
+			case KeyEvent.VK_RIGHT: bR = keyPressed; break;
 			}
-			
-			tank.setMainTankDir();
 		}
 	}
 }

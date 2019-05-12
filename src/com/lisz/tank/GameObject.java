@@ -4,12 +4,8 @@ import java.awt.Graphics;
 
 public interface GameObject {
 	void move();
-	void setMainTankDir();
+	void setDir(Dir dir);
 	public int getX();
 	public int getY();
-	public void setbL(boolean bL);
-	public void setbU(boolean bU);
-	public void setbR(boolean bR);
-	public void setbD(boolean bD);
 	void paint(Graphics g);
 }
