@@ -1,15 +1,19 @@
 package com.lisz.tank;
 
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TankFrame extends Frame {
 	private static final long serialVersionUID = 1L;
 	private GameObject tank = new Tank(200, 200, Dir.UP, this);
+	public List<GameObject> gameObjects = new ArrayList<>();//new HashSet<>();
 	
 	
 	public TankFrame() {
@@ -24,11 +28,20 @@ public class TankFrame extends Frame {
 			}
 		});
 		addKeyListener(new MyKeyListener());
+		initGameObjects();
 	}
 	
+	private void initGameObjects() {
+		gameObjects.add(tank);
+	}
+
 	@Override
 	public void paint(Graphics g) {
-		tank.paint(g);
+		Color c = g.getColor();
+		g.setColor(new Color(255, 255, 255));
+		g.fillRect(0, 0, getWidth(), getHeight());
+		g.setColor(c);
+		gameObjects.forEach(o -> o.paint(g));
 	}
 	
 	private class MyKeyListener extends KeyAdapter {
@@ -42,7 +55,13 @@ public class TankFrame extends Frame {
 			setDirKeyPressedStatus(e, true);
 			Dir dir = calculateDir();
 			tank.setDir(dir);
-			tank.move();
+			//tank.move();
+		}
+
+		private void setTankFire(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+				tank.fire();
+			}
 		}
 
 		private Dir calculateDir() {
@@ -72,6 +91,7 @@ public class TankFrame extends Frame {
 			setDirKeyPressedStatus(e, false);
 			Dir dir = calculateDir();
 			tank.setDir(dir);
+			setTankFire(e);
 		}
 		
 		private void setDirKeyPressedStatus(KeyEvent e, boolean keyPressed) {
@@ -80,8 +100,10 @@ public class TankFrame extends Frame {
 			case KeyEvent.VK_DOWN: bD = keyPressed; break;
 			case KeyEvent.VK_LEFT: bL = keyPressed; break;
 			case KeyEvent.VK_RIGHT: bR = keyPressed; break;
+			//default:return;
 			}
 			boolean dirKeyPressed = bU || bL || bR || bD;
+			System.out.println("Tank moving: " + dirKeyPressed);
 			tank.setMoving(dirKeyPressed);
 		}
 	}

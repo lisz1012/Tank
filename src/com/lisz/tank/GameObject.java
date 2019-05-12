@@ -11,4 +11,5 @@ public interface GameObject {
 	void paint(Graphics g);
 	boolean isMoving();
 	void setMoving(boolean moving);
+	void fire();
 }

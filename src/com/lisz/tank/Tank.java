@@ -72,15 +72,26 @@ public class Tank implements GameObject {
 
 	@Override
 	public void setMoving(boolean moving) {
+		if (!moving) {
+			System.out.println("Set moving to false!");
+		}
 		this.moving = moving;
 	}
 
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(new Color(255, 255, 255));
-		g.fillRect(0, 0, tf.getWidth(), tf.getHeight());
+		Color c = g.getColor();
 		g.setColor(new Color(0, 0, 0));
 		g.fillRect(x, y, 50, 50);
+		g.setColor(c);
+		move();
+	}
+
+	@Override
+	public void fire() {
+		tf.gameObjects.add(new Bullet(dir, x, y));
+		System.out.println("DIR: " + dir);
+		System.out.println("FIRE!");
 	}
 
 }
