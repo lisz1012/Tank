@@ -46,7 +46,7 @@ public class TankFrame extends Frame {
 		}
 
 		private Dir calculateDir() {
-			Dir dir = Dir.NONE;
+			Dir dir = tank.getDir();
 			if (bD && !bU && !bR && !bL) {
 				dir = Dir.DOWN;
 			} else if (!bD && bU && !bR && !bL) {
@@ -81,6 +81,8 @@ public class TankFrame extends Frame {
 			case KeyEvent.VK_LEFT: bL = keyPressed; break;
 			case KeyEvent.VK_RIGHT: bR = keyPressed; break;
 			}
+			boolean dirKeyPressed = bU || bL || bR || bD;
+			tank.setMoving(dirKeyPressed);
 		}
 	}
 }

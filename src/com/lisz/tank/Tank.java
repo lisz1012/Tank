@@ -8,7 +8,7 @@ public class Tank implements GameObject {
 	private int y = 200;
 	private Dir dir = Dir.UP;
 	private TankFrame tf;
-	
+	private boolean moving = false;
 	private static final int SPEED = 10;
 	
 
@@ -23,6 +23,7 @@ public class Tank implements GameObject {
 	
 	@Override
 	public void move() {
+		if (!moving) return;
 		switch (dir) {
 		case DOWN: y += SPEED; break;
 		case UP: y -= SPEED; break;
@@ -40,7 +41,13 @@ public class Tank implements GameObject {
 	public void setDir(Dir dir) {
 		this.dir = dir;
 	}
+	
+	@Override
+	public Dir getDir() {
+		return dir;
+	}
 
+	@Override
 	public int getY() {
 		return y;
 	}
@@ -49,12 +56,23 @@ public class Tank implements GameObject {
 		this.y = y;
 	}
 	
+	@Override
 	public int getX() {
 		return x;
 	}
 
 	public void setX(int x) {
 		this.x = x;
+	}
+	
+	@Override
+	public boolean isMoving() {
+		return moving;
+	}
+
+	@Override
+	public void setMoving(boolean moving) {
+		this.moving = moving;
 	}
 
 	@Override
