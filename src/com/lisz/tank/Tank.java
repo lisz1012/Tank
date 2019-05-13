@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Tank extends GameObject {
+	private static final int WIDTH = 50;
+	private static final int HEIGHT = 50;
 	private static final int SPEED = 10;
 	
 	public Tank (int x, int y, Dir dir, TankFrame tf, boolean good) {
@@ -13,6 +15,8 @@ public class Tank extends GameObject {
 		this.tf = tf;
 		live = true;
 		this.good = good;
+		width = WIDTH;
+		height = HEIGHT;
 	}
 	
 	@Override
@@ -70,7 +74,7 @@ public class Tank extends GameObject {
 		} else {
 			g.setColor(Color.BLUE);
 		}
-		g.fillRect(x, y, 50, 50); // TODO change it when using image
+		g.fillRect(x, y, width, height); // TODO change it when using image
 		g.setColor(c);
 		move();
 	}

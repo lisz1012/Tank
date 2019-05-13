@@ -5,6 +5,8 @@ import java.awt.Graphics;
 public abstract class GameObject implements GameModel {
 	protected int x = 200;
 	protected int y = 200;
+	protected int width;
+	protected int height;
 	protected boolean live;
 	protected Dir dir = Dir.UP;
 	protected TankFrame tf;

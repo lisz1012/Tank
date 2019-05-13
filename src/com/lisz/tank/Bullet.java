@@ -17,6 +17,8 @@ public class Bullet extends GameObject {
 		this.good = good;
 		live = true;
 		moving = true;
+		width = WIDTH;
+		height = HEIGHT;
 	}
 
 	public void setX(int x) {
@@ -50,7 +52,7 @@ public class Bullet extends GameObject {
 	public void paint(Graphics g) {
 		Color c = g.getColor();
 		g.setColor(Color.YELLOW);
-		g.fillOval(x, y, WIDTH, HEIGHT);
+		g.fillOval(x, y, width, height);
 		g.setColor(c);
 		move();
 	}
