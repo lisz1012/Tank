@@ -69,8 +69,13 @@ public abstract class GameObject implements GameModel {
 
 	@Override
 	public boolean hit(GameObject o) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean hit = o.getX() > x - o.getWidth() && o.getX() < x + width && 
+				   o.getY() > y - o.getHeight() && o.getY() < y + height;
+		if (hit && (o instanceof Bullet) && good != o.good) {
+			live = false;
+			o.setLive(false);
+		}
+		return hit;
 	}
 	
 	@Override
