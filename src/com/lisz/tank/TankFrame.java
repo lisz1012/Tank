@@ -59,6 +59,15 @@ public class TankFrame extends Frame {
 	
 	@Override
 	public void paint(Graphics g) {
+		Color c = g.getColor();
+		g.setColor(Color.WHITE);
+		g.drawString("Object的数量" + gameObjects.size(), 10, 60);
+		g.setColor(c);
+		for (int i = gameObjects.size() - 1; i >= 0; i--) {
+			if (!gameObjects.get(i).isLive()) {
+				gameObjects.remove(i);
+			}
+		}
 		gameObjects.forEach(o -> o.paint(g));
 	}
 	

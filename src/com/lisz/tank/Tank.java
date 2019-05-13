@@ -3,7 +3,7 @@ package com.lisz.tank;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Tank implements GameObject {
+public class Tank extends GameObject {
 	private int x = 200;
 	private int y = 200;
 	private Dir dir = Dir.UP;
@@ -19,6 +19,7 @@ public class Tank implements GameObject {
 		this.y = y;
 		this.dir = dir;
 		this.tf = tf;
+		live = true;
 	}
 	
 	@Override

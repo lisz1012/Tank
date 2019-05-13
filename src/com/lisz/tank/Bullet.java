@@ -3,7 +3,7 @@ package com.lisz.tank;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Bullet implements GameObject {
+public class Bullet extends GameObject {
 	private static final int SPEED = 15;
 	private static final int WIDTH = 5;
 	private static final int HEIGHT = 5;
