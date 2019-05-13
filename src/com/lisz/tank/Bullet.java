@@ -8,14 +8,6 @@ public class Bullet extends GameObject {
 	private static final int WIDTH = 5;
 	private static final int HEIGHT = 5;
 	
-	private Dir dir;
-	private int x;
-	private int y;
-	private boolean moving = true;
-	private boolean live = true;
-	private TankFrame tf;
-	private boolean good;
-	
 	public Bullet(Dir dir, int x, int y, TankFrame tf, boolean good) {
 		super();
 		this.dir = dir;
@@ -23,14 +15,8 @@ public class Bullet extends GameObject {
 		this.y = y;
 		this.tf = tf;
 		this.good = good;
-	}
-
-	public boolean isLive() {
-		return live;
-	}
-
-	public void setLive(boolean live) {
-		this.live = live;
+		live = true;
+		moving = true;
 	}
 
 	public void setX(int x) {
@@ -61,48 +47,12 @@ public class Bullet extends GameObject {
 	}
 
 	@Override
-	public Dir getDir() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setDir(Dir dir) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public int getX() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getY() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public void paint(Graphics g) {
 		Color c = g.getColor();
 		g.setColor(Color.YELLOW);
 		g.fillOval(x, y, WIDTH, HEIGHT);
 		g.setColor(c);
 		move();
-	}
-
-	@Override
-	public boolean isMoving() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void setMoving(boolean moving) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

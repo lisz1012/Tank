@@ -45,7 +45,7 @@ public class TankFrame extends Frame {
 
 	private void generateEnemies(int enemyCount) {
 		for (int i = 0; i < enemyCount; i++) {
-			gameObjects.add(new Tank(50 + 65 * i, 50, Dir.DOWN, this, false));
+			gameObjects.add(new Tank(50 + 65 * i, 100, Dir.DOWN, this, false));
 		}
 	}
 

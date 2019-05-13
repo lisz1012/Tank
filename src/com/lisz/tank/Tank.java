@@ -4,15 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Tank extends GameObject {
-	private int x = 200;
-	private int y = 200;
-	private Dir dir = Dir.UP;
-	private TankFrame tf;
-	private boolean moving = false;
 	private static final int SPEED = 10;
-	private boolean good;
-
-	//public Tank() {}
 	
 	public Tank (int x, int y, Dir dir, TankFrame tf, boolean good) {
 		this.x = x;
@@ -49,20 +41,10 @@ public class Tank extends GameObject {
 		return dir;
 	}
 
-	@Override
-	public int getY() {
-		return y;
-	}
-
 	public void setY(int y) {
 		this.y = y;
 	}
 	
-	@Override
-	public int getX() {
-		return x;
-	}
-
 	public void setX(int x) {
 		this.x = x;
 	}

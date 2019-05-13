@@ -2,8 +2,15 @@ package com.lisz.tank;
 
 import java.awt.Graphics;
 
-public class GameObject implements GameModel {
+public abstract class GameObject implements GameModel {
+	protected int x = 200;
+	protected int y = 200;
 	protected boolean live;
+	protected Dir dir = Dir.UP;
+	protected TankFrame tf;
+	protected boolean moving = false;
+	protected boolean good;
+	
 	public boolean isLive() {
 		return live;
 	}
@@ -12,58 +19,41 @@ public class GameObject implements GameModel {
 		this.live = live;
 	}
 
-	@Override
-	public void move() {
-
-	}
+	public abstract void move();
 
 	@Override
 	public Dir getDir() {
-		// TODO Auto-generated method stub
-		return null;
+		return dir;
 	}
 
 	@Override
 	public void setDir(Dir dir) {
-		// TODO Auto-generated method stub
-
+		this.dir = dir;
 	}
 
 	@Override
 	public int getX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return x;
 	}
 
 	@Override
 	public int getY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return y;
 	}
 
-	@Override
-	public void paint(Graphics g) {
-		// TODO Auto-generated method stub
-
-	}
+	public abstract void paint(Graphics g);
 
 	@Override
 	public boolean isMoving() {
-		// TODO Auto-generated method stub
-		return false;
+		return moving;
 	}
 
 	@Override
 	public void setMoving(boolean moving) {
-		// TODO Auto-generated method stub
-
+		this.moving = moving;
 	}
 
-	@Override
-	public void fire() {
-		// TODO Auto-generated method stub
-
-	}
+	public abstract void fire() ;
 
 	@Override
 	public boolean hit() {
