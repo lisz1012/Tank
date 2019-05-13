@@ -3,6 +3,7 @@ package com.lisz.tank;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -10,14 +11,19 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class TankFrame extends Frame {
 	private static final long serialVersionUID = 1L;
+	private static final int GAME_WIDTH = 800;
+	private static final int GAME_HEIGHT = 600;
+	
 	private GameObject tank = new Tank(200, 200, Dir.UP, this);
 	public List<GameObject> gameObjects = new ArrayList<>();//new HashSet<>();
+	private Image offScreenImage = null;
 	
 	
 	public TankFrame() {
-		setSize(800, 600);
+		setSize(GAME_WIDTH, GAME_HEIGHT);
 		setResizable(false);
 		setTitle("Tank War");
 		setVisible(true);
@@ -35,12 +41,24 @@ public class TankFrame extends Frame {
 		gameObjects.add(tank);
 	}
 
+	//双缓冲，解决屏幕刷新速率太快，计算跟不上而出现的“闪烁”问题，先画在一个image上，然后再把整个image画到屏幕上
+	//就是把内存的内容复制到显存
+	@Override
+	public void update(Graphics g) {
+		if (offScreenImage == null) {
+			offScreenImage = createImage(GAME_WIDTH, GAME_HEIGHT);
+		}
+		Graphics gOffScreen = offScreenImage.getGraphics();
+		Color c = gOffScreen.getColor();
+		gOffScreen.setColor(Color.BLACK);
+		gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		gOffScreen.setColor(c);
+		paint(gOffScreen);
+		g.drawImage(offScreenImage, 0, 0, null);
+	}
+	
 	@Override
 	public void paint(Graphics g) {
-		Color c = g.getColor();
-		g.setColor(new Color(255, 255, 255));
-		g.fillRect(0, 0, getWidth(), getHeight());
-		g.setColor(c);
 		gameObjects.forEach(o -> o.paint(g));
 	}
 	
@@ -59,7 +77,7 @@ public class TankFrame extends Frame {
 		}
 
 		private void setTankFire(KeyEvent e) {
-			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			if (e.getKeyCode() == KeyEvent.VK_A) {
 				tank.fire();
 			}
 		}

@@ -13,12 +13,14 @@ public class Bullet implements GameObject {
 	private int y;
 	private boolean moving = true;
 	private boolean live = true;
+	private TankFrame tf;
 	
-	public Bullet(Dir dir, int x, int y) {
+	public Bullet(Dir dir, int x, int y, TankFrame tf) {
 		super();
 		this.dir = dir;
 		this.x = x;
 		this.y = y;
+		this.tf = tf;
 	}
 
 	public boolean isLive() {
@@ -50,6 +52,9 @@ public class Bullet implements GameObject {
 		case RIGHT_DOWN: x += SPEED; y += SPEED; break;
 		case LEFT_DOWN: x -= SPEED; y += SPEED; break;
 		default:break;
+		}
+		if (x > tf.getWidth() || x < 0 || y > tf.getHeight() || y < 0) {
+			live = false;
 		}
 	}
 

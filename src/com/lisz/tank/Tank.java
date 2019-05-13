@@ -81,7 +81,7 @@ public class Tank implements GameObject {
 	@Override
 	public void paint(Graphics g) {
 		Color c = g.getColor();
-		g.setColor(new Color(0, 0, 0));
+		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, 50, 50);
 		g.setColor(c);
 		move();
@@ -89,7 +89,7 @@ public class Tank implements GameObject {
 
 	@Override
 	public void fire() {
-		tf.gameObjects.add(new Bullet(dir, x, y));
+		tf.gameObjects.add(new Bullet(dir, x, y, tf));
 		System.out.println("DIR: " + dir);
 		System.out.println("FIRE!");
 	}
