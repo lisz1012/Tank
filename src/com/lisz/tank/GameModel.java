@@ -12,4 +12,5 @@ public interface GameModel {
 	boolean isMoving();
 	void setMoving(boolean moving);
 	void fire();
+	boolean hit();
 }

@@ -10,16 +10,17 @@ public class Tank extends GameObject {
 	private TankFrame tf;
 	private boolean moving = false;
 	private static final int SPEED = 10;
-	
+	private boolean good;
 
 	//public Tank() {}
 	
-	public Tank (int x, int y, Dir dir, TankFrame tf) {
+	public Tank (int x, int y, Dir dir, TankFrame tf, boolean good) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.tf = tf;
 		live = true;
+		this.good = good;
 	}
 	
 	@Override
@@ -82,7 +83,11 @@ public class Tank extends GameObject {
 	@Override
 	public void paint(Graphics g) {
 		Color c = g.getColor();
-		g.setColor(Color.YELLOW);
+		if (good) {
+			g.setColor(Color.RED);
+		} else {
+			g.setColor(Color.BLUE);
+		}
 		g.fillRect(x, y, 50, 50); // TODO change it when using image
 		g.setColor(c);
 		move();
@@ -90,7 +95,7 @@ public class Tank extends GameObject {
 
 	@Override
 	public void fire() {
-		tf.gameObjects.add(new Bullet(dir, x + 25, y + 25, tf)); // TODO change it when using image
+		tf.gameObjects.add(new Bullet(dir, x + 25, y + 25, tf, good)); // TODO change it when using image
 		System.out.println("DIR: " + dir);
 		System.out.println("FIRE!");
 	}

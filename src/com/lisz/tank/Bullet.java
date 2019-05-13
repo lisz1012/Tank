@@ -14,13 +14,15 @@ public class Bullet extends GameObject {
 	private boolean moving = true;
 	private boolean live = true;
 	private TankFrame tf;
+	private boolean good;
 	
-	public Bullet(Dir dir, int x, int y, TankFrame tf) {
+	public Bullet(Dir dir, int x, int y, TankFrame tf, boolean good) {
 		super();
 		this.dir = dir;
 		this.x = x;
 		this.y = y;
 		this.tf = tf;
+		this.good = good;
 	}
 
 	public boolean isLive() {
@@ -85,7 +87,7 @@ public class Bullet extends GameObject {
 	@Override
 	public void paint(Graphics g) {
 		Color c = g.getColor();
-		g.setColor(Color.RED);
+		g.setColor(Color.YELLOW);
 		g.fillOval(x, y, WIDTH, HEIGHT);
 		g.setColor(c);
 		move();

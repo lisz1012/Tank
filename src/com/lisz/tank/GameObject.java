@@ -64,6 +64,12 @@ public class GameObject implements GameModel {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public boolean hit() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 

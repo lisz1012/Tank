@@ -16,8 +16,9 @@ public class TankFrame extends Frame {
 	private static final long serialVersionUID = 1L;
 	private static final int GAME_WIDTH = 800;
 	private static final int GAME_HEIGHT = 600;
+	private static final int ENEMY_COUNT = 5;
 	
-	private GameObject tank = new Tank(200, 200, Dir.UP, this);
+	private GameObject tank = new Tank(200, 200, Dir.UP, this, true);
 	public List<GameObject> gameObjects = new ArrayList<>();//new HashSet<>();
 	private Image offScreenImage = null;
 	
@@ -39,6 +40,13 @@ public class TankFrame extends Frame {
 	
 	private void initGameObjects() {
 		gameObjects.add(tank);
+		generateEnemies(ENEMY_COUNT);
+	}
+
+	private void generateEnemies(int enemyCount) {
+		for (int i = 0; i < enemyCount; i++) {
+			gameObjects.add(new Tank(50 + 65 * i, 50, Dir.DOWN, this, false));
+		}
 	}
 
 	//双缓冲，解决屏幕刷新速率太快，计算跟不上而出现的“闪烁”问题，先画在一个image上，然后再把整个image画到屏幕上
