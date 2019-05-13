@@ -22,8 +22,8 @@ public class Tank extends GameObject {
 	@Override
 	public void move() {
 		if (!moving) return;
-		int origX = x;
-		int origY = y;
+		origX = x;
+		origY = y;
 		switch (dir) {
 		case DOWN: y += SPEED; break;
 		case UP: y -= SPEED; break;
