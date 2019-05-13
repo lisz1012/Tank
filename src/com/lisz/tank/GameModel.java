@@ -15,4 +15,5 @@ public interface GameModel {
 	void setMoving(boolean moving);
 	void fire();
 	boolean hit(GameObject o);
+	boolean outOfBound(TankFrame tf);
 }

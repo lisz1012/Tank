@@ -22,6 +22,8 @@ public class Tank extends GameObject {
 	@Override
 	public void move() {
 		if (!moving) return;
+		int origX = x;
+		int origY = y;
 		switch (dir) {
 		case DOWN: y += SPEED; break;
 		case UP: y -= SPEED; break;
@@ -32,6 +34,10 @@ public class Tank extends GameObject {
 		case RIGHT_DOWN: x += SPEED; y += SPEED; break;
 		case LEFT_DOWN: x -= SPEED; y += SPEED; break;
 		default:break;
+		}
+		if (outOfBound(tf)) {
+			x = origX;
+			y = origY;
 		}
 	}
 	

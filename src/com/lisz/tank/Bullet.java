@@ -43,7 +43,7 @@ public class Bullet extends GameObject {
 		case LEFT_DOWN: x -= SPEED; y += SPEED; break;
 		default:break;
 		}
-		if (x > tf.getWidth() || x < 0 || y > tf.getHeight() || y < 0) {
+		if (outOfBound(tf)) {
 			live = false;
 		}
 	}
