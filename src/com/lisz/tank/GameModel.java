@@ -8,9 +8,11 @@ public interface GameModel {
 	void setDir(Dir dir);
 	public int getX();
 	public int getY();
+	int getWidth();
+	int getHeight();
 	void paint(Graphics g);
 	boolean isMoving();
 	void setMoving(boolean moving);
 	void fire();
-	boolean hit();
+	boolean hit(GameObject o);
 }

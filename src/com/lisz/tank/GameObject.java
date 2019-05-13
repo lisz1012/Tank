@@ -55,10 +55,20 @@ public abstract class GameObject implements GameModel {
 		this.moving = moving;
 	}
 
+	@Override
+	public int getWidth() {
+		return width;
+	}
+	
+	@Override
+	public int getHeight() {
+		return height;
+	}
+
 	public abstract void fire() ;
 
 	@Override
-	public boolean hit() {
+	public boolean hit(GameObject o) {
 		// TODO Auto-generated method stub
 		return false;
 	}
