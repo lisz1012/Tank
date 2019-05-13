@@ -83,14 +83,14 @@ public class Tank extends GameObject {
 	public void paint(Graphics g) {
 		Color c = g.getColor();
 		g.setColor(Color.YELLOW);
-		g.fillRect(x, y, 50, 50);
+		g.fillRect(x, y, 50, 50); // TODO change it when using image
 		g.setColor(c);
 		move();
 	}
 
 	@Override
 	public void fire() {
-		tf.gameObjects.add(new Bullet(dir, x, y, tf));
+		tf.gameObjects.add(new Bullet(dir, x + 25, y + 25, tf)); // TODO change it when using image
 		System.out.println("DIR: " + dir);
 		System.out.println("FIRE!");
 	}
