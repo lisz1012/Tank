@@ -4,8 +4,8 @@ import java.awt.Graphics;
 
 public class Bullet extends GameObject {
 	private static final int SPEED = 15;
-	private static final int WIDTH = 5;
-	private static final int HEIGHT = 5;
+	public static final int WIDTH = ResourceMgr.BULLET_D.getWidth();
+	public static final int HEIGHT = ResourceMgr.BULLET_D.getHeight();
 	
 	public Bullet(Dir dir, int x, int y, TankFrame tf, boolean good) {
 		super();

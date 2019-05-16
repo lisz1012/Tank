@@ -3,8 +3,8 @@ package com.lisz.tank;
 import java.awt.Graphics;
 
 public class Tank extends GameObject {
-	private static final int WIDTH = 50;
-	private static final int HEIGHT = 50;
+	public static final int WIDTH = ResourceMgr.TANK_D.getWidth();
+	public static final int HEIGHT = ResourceMgr.TANK_D.getHeight();
 	private static final int SPEED = 10;
 	
 	public Tank (int x, int y, Dir dir, TankFrame tf, boolean good) {
@@ -90,9 +90,7 @@ public class Tank extends GameObject {
 
 	@Override
 	public void fire() {
-		tf.gameObjects.add(new Bullet(dir, x + 25, y + 25, tf, good)); // TODO change it when using image
-		System.out.println("DIR: " + dir);
-		System.out.println("FIRE!");
+		tf.gameObjects.add(new Bullet(dir, x + WIDTH / 2 - Bullet.WIDTH / 2, y + HEIGHT / 2 - Bullet.HEIGHT / 2, tf, good)); // TODO change it when using image
 	}
 
 }
