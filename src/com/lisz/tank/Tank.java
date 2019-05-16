@@ -74,14 +74,18 @@ public class Tank extends GameObject {
 
 	@Override
 	public void paint(Graphics g) {
-		Color c = g.getColor();
-		if (good) {
-			g.setColor(Color.RED);
-		} else {
-			g.setColor(Color.BLUE);
+		switch (dir) {
+		case LEFT: 		 g.drawImage(ResourceMgr.TANK_L, x, y, null);	break;
+		case RIGHT: 	 g.drawImage(ResourceMgr.TANK_R, x, y, null);	break;
+		case UP: 		 g.drawImage(ResourceMgr.TANK_U, x, y, null);	break;
+		case DOWN:  	 g.drawImage(ResourceMgr.TANK_D, x, y, null);	break;
+		case LEFT_UP: 	 g.drawImage(ResourceMgr.TANK_LU, x, y, null);  break;
+		case RIGHT_UP: 	 g.drawImage(ResourceMgr.TANK_RU, x, y, null);	break;
+		case LEFT_DOWN:  g.drawImage(ResourceMgr.TANK_LD, x, y, null);	break;
+		case RIGHT_DOWN: g.drawImage(ResourceMgr.TANK_RD, x, y, null);	break;
+		default:
+			break;
 		}
-		g.fillRect(x, y, width, height); // TODO change it when using image
-		g.setColor(c);
 		move();
 	}
 
