@@ -1,6 +1,5 @@
 package com.lisz.tank;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class Bullet extends GameObject {
@@ -50,10 +49,18 @@ public class Bullet extends GameObject {
 
 	@Override
 	public void paint(Graphics g) {
-		Color c = g.getColor();
-		g.setColor(Color.YELLOW);
-		g.fillOval(x, y, width, height);
-		g.setColor(c);
+		switch (dir) {
+		case LEFT: 		 g.drawImage(ResourceMgr.BULLET_L, x, y, null);	break;
+		case RIGHT: 	 g.drawImage(ResourceMgr.BULLET_R, x, y, null);	break;
+		case UP: 		 g.drawImage(ResourceMgr.BULLET_U, x, y, null);	break;
+		case DOWN:  	 g.drawImage(ResourceMgr.BULLET_D, x, y, null);	break;
+		case LEFT_UP: 	 g.drawImage(ResourceMgr.BULLET_LU, x, y, null);  break;
+		case RIGHT_UP: 	 g.drawImage(ResourceMgr.BULLET_RU, x, y, null);	break;
+		case LEFT_DOWN:  g.drawImage(ResourceMgr.BULLET_LD, x, y, null);	break;
+		case RIGHT_DOWN: g.drawImage(ResourceMgr.BULLET_RD, x, y, null);	break;
+		default:
+			break;
+		}
 		move();
 	}
 

@@ -1,6 +1,5 @@
 package com.lisz.tank;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class Tank extends GameObject {

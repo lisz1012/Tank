@@ -15,6 +15,15 @@ public class ResourceMgr {
 	public static BufferedImage TANK_RD;
 	public static BufferedImage TANK_LD;
 	
+	public static BufferedImage BULLET_L;
+	public static BufferedImage BULLET_U;
+	public static BufferedImage BULLET_R;
+	public static BufferedImage BULLET_D;
+	public static BufferedImage BULLET_LU;
+	public static BufferedImage BULLET_RU;
+	public static BufferedImage BULLET_RD;
+	public static BufferedImage BULLET_LD;
+	
 	static {
 		try {
 			TANK_L = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
@@ -25,6 +34,15 @@ public class ResourceMgr {
 			TANK_RU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankRU.gif"));
 			TANK_RD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankRD.gif"));
 			TANK_LD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankLD.gif"));
+			
+			BULLET_L = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletL.gif"));
+			BULLET_U = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
+			BULLET_R = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletR.gif"));
+			BULLET_D = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
+			BULLET_LU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletLU.gif"));
+			BULLET_RU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletRU.gif"));
+			BULLET_RD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletRD.gif"));
+			BULLET_LD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletLD.gif"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
