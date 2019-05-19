@@ -1,11 +1,13 @@
 package com.lisz.tank;
 
 import java.awt.Graphics;
+import java.util.Random;
 
 public class Tank extends GameObject {
 	public static final int WIDTH = ResourceMgr.TANK_D.getWidth();
 	public static final int HEIGHT = ResourceMgr.TANK_D.getHeight();
 	private static final int SPEED = 10;
+	private static final Random RANDOM = new Random();
 	
 	public Tank (int x, int y, Dir dir, TankFrame tf, boolean good) {
 		this.x = x;
@@ -38,8 +40,29 @@ public class Tank extends GameObject {
 			x = origX;
 			y = origY;
 		}
+		if (!good) {
+			resetDir();
+		}
 	}
 	
+	private void resetDir() {
+		int r = RANDOM.nextInt(1000);
+		if (r > 850) {
+			switch (r % 8) {
+			case 0: dir = Dir.DOWN; break;
+			case 1: dir = Dir.UP; break;
+			case 2: dir = Dir.LEFT; break;
+			case 3: dir = Dir.RIGHT; break;
+			case 4: dir = Dir.LEFT_UP; break;
+			case 5: dir = Dir.RIGHT_UP; break;
+			case 6: dir = Dir.RIGHT_DOWN; break;
+			case 7: dir = Dir.LEFT_DOWN; break;
+			default:
+				break;
+			}
+		}
+	}
+
 	@Override
 	public void setDir(Dir dir) {
 		this.dir = dir;
