@@ -13,7 +13,7 @@ public abstract class GameObject implements GameModel {
 	protected Dir dir = Dir.UP;
 	protected TankFrame tf;
 	protected boolean moving = false;
-	protected boolean good;
+	protected Group group;
 	
 	public boolean isLive() {
 		return live;
@@ -74,7 +74,7 @@ public abstract class GameObject implements GameModel {
 		boolean hit = o.getX() > x - o.getWidth() && o.getX() < x + width && 
 				   o.getY() > y - o.getHeight() && o.getY() < y + height;
 		if (hit && ((o instanceof Bullet) && (this instanceof Tank) || (o instanceof Tank) && (this instanceof Bullet)) 
-				&& good != o.good) {
+				&& group != o.group) {
 			live = false;
 			o.setLive(false);
 		} else if (hit && (o instanceof Tank) && (this instanceof Tank)) {

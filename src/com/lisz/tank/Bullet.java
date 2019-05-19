@@ -7,13 +7,13 @@ public class Bullet extends GameObject {
 	public static final int WIDTH = ResourceMgr.BULLET_D.getWidth();
 	public static final int HEIGHT = ResourceMgr.BULLET_D.getHeight();
 	
-	public Bullet(Dir dir, int x, int y, TankFrame tf, boolean good) {
+	public Bullet(Dir dir, int x, int y, TankFrame tf, Group group) {
 		super();
 		this.dir = dir;
 		this.x = x;
 		this.y = y;
 		this.tf = tf;
-		this.good = good;
+		this.group = group;
 		live = true;
 		moving = true;
 		width = WIDTH;

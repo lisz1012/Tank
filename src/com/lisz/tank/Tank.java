@@ -12,13 +12,13 @@ public class Tank extends GameObject {
 	private static final int RESET_DIR_POSSIBILITY = 850;
 	private static final int FIRE_POSSIBILITY = 970;
 	
-	public Tank (int x, int y, Dir dir, TankFrame tf, boolean good) {
+	public Tank (int x, int y, Dir dir, TankFrame tf, Group group) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.tf = tf;
 		live = true;
-		this.good = good;
+		this.group = group;
 		width = WIDTH;
 		height = HEIGHT;
 	}
@@ -43,7 +43,7 @@ public class Tank extends GameObject {
 			x = origX;
 			y = origY;
 		}
-		if (!good) {
+		if (group == Group.BAD) {
 			resetDir();
 			fireRandomly();
 		}
@@ -129,9 +129,9 @@ public class Tank extends GameObject {
 	public void fire() {
 		if (!live) return;
 		if (dir == Dir.RIGHT_UP || dir == Dir.LEFT_DOWN) {
-			tf.gameObjects.add(new Bullet(dir, x + WIDTH / 2 + 15, y + HEIGHT / 2 - Bullet.HEIGHT / 2, tf, good));
+			tf.gameObjects.add(new Bullet(dir, x + WIDTH / 2 + 15, y + HEIGHT / 2 - Bullet.HEIGHT / 2, tf, group));
 		} else {
-			tf.gameObjects.add(new Bullet(dir, x + WIDTH / 2 - Bullet.WIDTH / 2, y + HEIGHT / 2 - Bullet.HEIGHT / 2, tf, good));
+			tf.gameObjects.add(new Bullet(dir, x + WIDTH / 2 - Bullet.WIDTH / 2, y + HEIGHT / 2 - Bullet.HEIGHT / 2, tf, group));
 		}
 		 // TODO change it when using image
 	}

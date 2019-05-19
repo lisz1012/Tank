@@ -18,7 +18,7 @@ public class TankFrame extends Frame {
 	private static final int GAME_HEIGHT = 600;
 	private static final int ENEMY_COUNT = 5;
 	
-	private GameObject tank = new Tank(200, 200, Dir.UP, this, true);
+	private GameObject tank = new Tank(200, 200, Dir.UP, this, Group.GOOD);
 	public List<GameObject> gameObjects = new ArrayList<>();//new HashSet<>();
 	private Image offScreenImage = null;
 	
@@ -45,7 +45,7 @@ public class TankFrame extends Frame {
 
 	private void generateEnemies(int enemyCount) {
 		for (int i = 0; i < enemyCount; i++) {
-			Tank enemy = new Tank(50 + 65 * i, 100, Dir.DOWN, this, false);
+			Tank enemy = new Tank(50 + 65 * i, 100, Dir.DOWN, this, Group.BAD);
 			enemy.setMoving(true);
 			gameObjects.add(enemy);
 		}
