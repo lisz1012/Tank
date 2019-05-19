@@ -26,6 +26,8 @@ public class ResourceMgr {
 	
 	public static BufferedImage EXPLOSION_IMGS[] = new BufferedImage[16];
 	
+	public static Audio EXPLOSION_AUDIO = new Audio("audio/explode.wav");
+	
 	static {
 		try {
 			TANK_L = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));

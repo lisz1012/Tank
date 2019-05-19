@@ -9,6 +9,7 @@ public class Explosion extends GameObject {
 		this.x = x;
 		this.y = y;
 		live = true;
+		new Thread(new Audio("audio/explode.wav")).start();
 	}
 	@Override
 	public void move() {}
