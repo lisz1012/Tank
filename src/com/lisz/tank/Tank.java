@@ -102,9 +102,6 @@ public class Tank extends GameObject {
 	@Override
 	public void setMoving(boolean moving) {
 		if (!live) return;
-		if (!moving) {
-			System.out.println("Set moving to false!");
-		}
 		this.moving = moving;
 	}
 

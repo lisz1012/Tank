@@ -77,6 +77,11 @@ public abstract class GameObject implements GameModel {
 				&& group != o.group) {
 			live = false;
 			o.setLive(false);
+			if (this instanceof Tank) {
+				tf.gameObjects.add(new Explosion(x, y));
+			} else {
+				tf.gameObjects.add(new Explosion(o.x, o.y));
+			}
 		} else if (hit && (o instanceof Tank) && (this instanceof Tank)) {
 			x = origX;
 			y = origY;
