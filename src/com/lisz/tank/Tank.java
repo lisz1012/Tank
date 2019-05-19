@@ -90,7 +90,12 @@ public class Tank extends GameObject {
 
 	@Override
 	public void fire() {
-		tf.gameObjects.add(new Bullet(dir, x + WIDTH / 2 - Bullet.WIDTH / 2, y + HEIGHT / 2 - Bullet.HEIGHT / 2, tf, good)); // TODO change it when using image
+		if (dir == Dir.RIGHT_UP || dir == Dir.LEFT_DOWN) {
+			tf.gameObjects.add(new Bullet(dir, x + WIDTH / 2 + 15, y + HEIGHT / 2 - Bullet.HEIGHT / 2, tf, good));
+		} else {
+			tf.gameObjects.add(new Bullet(dir, x + WIDTH / 2 - Bullet.WIDTH / 2, y + HEIGHT / 2 - Bullet.HEIGHT / 2, tf, good));
+		}
+		 // TODO change it when using image
 	}
 
 }
