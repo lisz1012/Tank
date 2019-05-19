@@ -8,6 +8,9 @@ public class Tank extends GameObject {
 	public static final int HEIGHT = ResourceMgr.TANK_D.getHeight();
 	private static final int SPEED = 10;
 	private static final Random RANDOM = new Random();
+	private static final int RANDOM_BASE_NUMBER = 1000;
+	private static final int RESET_DIR_POSSIBILITY = 850;
+	private static final int FIRE_POSSIBILITY = 970;
 	
 	public Tank (int x, int y, Dir dir, TankFrame tf, boolean good) {
 		this.x = x;
@@ -42,12 +45,13 @@ public class Tank extends GameObject {
 		}
 		if (!good) {
 			resetDir();
+			fireRandomly();
 		}
 	}
 	
 	private void resetDir() {
-		int r = RANDOM.nextInt(1000);
-		if (r > 850) {
+		int r = RANDOM.nextInt(RANDOM_BASE_NUMBER);
+		if (r > RESET_DIR_POSSIBILITY) {
 			switch (r % 8) {
 			case 0: dir = Dir.DOWN; break;
 			case 1: dir = Dir.UP; break;
@@ -62,9 +66,18 @@ public class Tank extends GameObject {
 			}
 		}
 	}
+	
+	private void fireRandomly() {
+		if (!live) return;
+		int r = RANDOM.nextInt(RANDOM_BASE_NUMBER);
+		if (r > FIRE_POSSIBILITY) {
+			fire();
+		}
+	}
 
 	@Override
 	public void setDir(Dir dir) {
+		if (!live) return;
 		this.dir = dir;
 	}
 	
@@ -88,6 +101,7 @@ public class Tank extends GameObject {
 
 	@Override
 	public void setMoving(boolean moving) {
+		if (!live) return;
 		if (!moving) {
 			System.out.println("Set moving to false!");
 		}
@@ -113,6 +127,7 @@ public class Tank extends GameObject {
 
 	@Override
 	public void fire() {
+		if (!live) return;
 		if (dir == Dir.RIGHT_UP || dir == Dir.LEFT_DOWN) {
 			tf.gameObjects.add(new Bullet(dir, x + WIDTH / 2 + 15, y + HEIGHT / 2 - Bullet.HEIGHT / 2, tf, good));
 		} else {

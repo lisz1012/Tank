@@ -87,7 +87,10 @@ public class TankFrame extends Frame {
 				gameObjects.remove(i);
 			}
 		}
-		gameObjects.forEach(o -> o.paint(g));
+		
+		for (int i = 0; i < gameObjects.size(); i++) {
+			gameObjects.get(i).paint(g);
+		}
 	}
 	
 	private class MyKeyListener extends KeyAdapter {
@@ -149,7 +152,6 @@ public class TankFrame extends Frame {
 			//default:return;
 			}
 			boolean dirKeyPressed = bU || bL || bR || bD;
-			System.out.println("Tank moving: " + dirKeyPressed);
 			tank.setMoving(dirKeyPressed);
 		}
 	}
