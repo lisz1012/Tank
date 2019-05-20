@@ -1,5 +1,6 @@
 package com.lisz.tank;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
@@ -119,6 +120,12 @@ public class Tank extends GameObject {
 		case RIGHT_DOWN: g.drawImage(ResourceMgr.TANK_RD, x, y, null);	break;
 		default:
 			break;
+		}
+		if (group == Group.GOOD) {
+			Color c = g.getColor();
+			g.setColor(Color.RED);
+			g.drawString("My Tank", x, y);
+			g.setColor(c);
 		}
 		move();
 	}

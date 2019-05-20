@@ -77,6 +77,7 @@ public class TankFrame extends Frame {
 	public void paint(Graphics g) {
 		Color c = g.getColor();
 		g.setColor(Color.WHITE);
+		g.drawString("方向键移动，A键开炮!", 10, 40);
 		g.drawString("Object的数量" + gameObjects.size(), 10, 60);
 		g.setColor(c);
 		
@@ -111,8 +112,9 @@ public class TankFrame extends Frame {
 			setDirKeyPressedStatus(e, true);
 			Dir dir = calculateDir();
 			tank.setDir(dir);
-			new Thread(()->new Audio("audio/tank_move.wav").play()).start();
-			//tank.move();
+			if (tank.isMoving()) {
+				new Thread(()->new Audio("audio/tank_move.wav").play()).start();
+			}
 		}
 
 		private void setTankFire(KeyEvent e) {
