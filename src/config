@@ -1,2 +1,8 @@
 #Number of enemy tanks at initialization
 initEnemyTankCount=10
+gameWidth=800
+gameHeight=600
+tankSpeed=10
+randomBaseNumber=1000
+resetDirPossibility=850
+firePossibility=970
