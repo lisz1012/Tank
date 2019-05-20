@@ -11,6 +11,7 @@ public class Tank extends GameObject {
 	private static final int RANDOM_BASE_NUMBER = PropertyMgr.getInt("randomBaseNumber");
 	private static final int RESET_DIR_POSSIBILITY = PropertyMgr.getInt("resetDirPossibility");
 	private static final int FIRE_POSSIBILITY = PropertyMgr.getInt("firePossibility");
+	private Cannon cannon = new DefaultCannon();
 	
 	public Tank (int x, int y, Dir dir, TankFrame tf, Group group) {
 		this.x = x;
@@ -125,15 +126,18 @@ public class Tank extends GameObject {
 	@Override
 	public void fire() {
 		if (!live) return;
-		if (dir == Dir.RIGHT_UP || dir == Dir.LEFT_DOWN) {
-			tf.gameObjects.add(new Bullet(dir, x + WIDTH / 2 + 15, y + HEIGHT / 2 - Bullet.HEIGHT / 2, tf, group));
-		} else {
-			tf.gameObjects.add(new Bullet(dir, x + WIDTH / 2 - Bullet.WIDTH / 2, y + HEIGHT / 2 - Bullet.HEIGHT / 2, tf, group));
-		}
+		cannon.fire(this);
 		 // TODO change it when using image
 		if (group == Group.GOOD) {
 			new Thread(new Audio("audio/tank_fire.wav")).start();
 		}
 	}
 
+	public Cannon getCannon() {
+		return cannon;
+	}
+
+	public void setCannon(Cannon cannon) {
+		this.cannon = cannon;
+	}
 }
