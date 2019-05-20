@@ -106,6 +106,7 @@ public class TankFrame extends Frame {
 			setDirKeyPressedStatus(e, true);
 			Dir dir = calculateDir();
 			tank.setDir(dir);
+			new Thread(()->new Audio("audio/tank_move.wav").play()).start();
 			//tank.move();
 		}
 
