@@ -6,11 +6,11 @@ import java.util.Random;
 public class Tank extends GameObject {
 	public static final int WIDTH = ResourceMgr.TANK_D.getWidth();
 	public static final int HEIGHT = ResourceMgr.TANK_D.getHeight();
-	private static final int SPEED = Integer.parseInt(PropertyMgr.get("tankSpeed"));
+	private static final int SPEED = PropertyMgr.getInt("tankSpeed");
 	private static final Random RANDOM = new Random();
-	private static final int RANDOM_BASE_NUMBER = Integer.parseInt(PropertyMgr.get("randomBaseNumber"));
-	private static final int RESET_DIR_POSSIBILITY = Integer.parseInt(PropertyMgr.get("resetDirPossibility"));
-	private static final int FIRE_POSSIBILITY = Integer.parseInt(PropertyMgr.get("firePossibility"));
+	private static final int RANDOM_BASE_NUMBER = PropertyMgr.getInt("randomBaseNumber");
+	private static final int RESET_DIR_POSSIBILITY = PropertyMgr.getInt("resetDirPossibility");
+	private static final int FIRE_POSSIBILITY = PropertyMgr.getInt("firePossibility");
 	
 	public Tank (int x, int y, Dir dir, TankFrame tf, Group group) {
 		this.x = x;

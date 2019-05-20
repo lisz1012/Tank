@@ -14,14 +14,11 @@ public class PropertyMgr {
 		}
 	}
 	
-	public static String get(String key) {
-		if (props == null) {
-			return null;
-		}
-		return props.get(key).toString();
+	public static int getInt(String key) {
+		return Integer.parseInt(props.get(key).toString());
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(PropertyMgr.get("initEnemyTankCount"));
+		System.out.println(PropertyMgr.getInt("initEnemyTankCount"));
 	}
 }

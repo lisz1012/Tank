@@ -14,12 +14,16 @@ import java.util.List;
 
 public class TankFrame extends Frame {
 	private static final long serialVersionUID = 1L;
-	private static final int GAME_WIDTH = Integer.parseInt(PropertyMgr.get("gameWidth"));
-	private static final int GAME_HEIGHT = Integer.parseInt(PropertyMgr.get("gameHeight"));
-	private static final int ENEMY_COUNT = Integer.parseInt(PropertyMgr.get("initEnemyTankCount"));
+	private static final int GAME_WIDTH = PropertyMgr.getInt("gameWidth");
+	private static final int GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
+	private static final int ENEMY_COUNT = PropertyMgr.getInt("initEnemyTankCount");
 	private static final Audio BACK_GROUD_MUSIC = new BackGroundMusic("audio/war1.wav");
+	private static final int INIT_X = PropertyMgr.getInt("initX");
+	private static final int INIT_Y = PropertyMgr.getInt("initY");
+	private static final Color BACK_GROUND_COLOR = new Color(PropertyMgr.getInt("backGroundRedComponent"), 
+			PropertyMgr.getInt("backGroundGreenComponent"), PropertyMgr.getInt("backGroundBlueComponent"));
 	
-	private GameObject tank = new Tank(500, 500, Dir.UP, this, Group.GOOD);
+	private GameObject tank = new Tank(INIT_X, INIT_Y, Dir.UP, this, Group.GOOD);
 	public List<GameObject> gameObjects = new ArrayList<>();//new HashSet<>();
 	private Image offScreenImage = null;
 	
@@ -62,7 +66,7 @@ public class TankFrame extends Frame {
 		}
 		Graphics gOffScreen = offScreenImage.getGraphics();
 		Color c = gOffScreen.getColor();
-		gOffScreen.setColor(Color.BLACK);
+		gOffScreen.setColor(BACK_GROUND_COLOR);
 		gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		gOffScreen.setColor(c);
 		paint(gOffScreen);
