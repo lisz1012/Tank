@@ -131,6 +131,9 @@ public class Tank extends GameObject {
 			tf.gameObjects.add(new Bullet(dir, x + WIDTH / 2 - Bullet.WIDTH / 2, y + HEIGHT / 2 - Bullet.HEIGHT / 2, tf, group));
 		}
 		 // TODO change it when using image
+		if (group == Group.GOOD) {
+			new Thread(new Audio("audio/tank_fire.wav")).start();
+		}
 	}
 
 }

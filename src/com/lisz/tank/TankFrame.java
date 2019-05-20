@@ -16,7 +16,7 @@ public class TankFrame extends Frame {
 	private static final long serialVersionUID = 1L;
 	private static final int GAME_WIDTH = 800;
 	private static final int GAME_HEIGHT = 600;
-	private static final int ENEMY_COUNT = 5;
+	private static final int ENEMY_COUNT = Integer.parseInt(PropertyMgr.get("initEnemyTankCount").toString());
 	private static final Audio BACK_GROUD_MUSIC = new BackGroundMusic("audio/war1.wav");
 	
 	private GameObject tank = new Tank(500, 500, Dir.UP, this, Group.GOOD);
