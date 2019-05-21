@@ -91,7 +91,7 @@ public abstract class GameObject implements GameModel {
 	
 	@Override
 	public boolean outOfBound(TankFrame tf) {
-		return x + width > tf.getWidth() || x < 0 || y + height > tf.getHeight() || y < 0;
+		return x + width > tf.getWidth() || x < 0 || y + height > tf.getHeight() || y < 20;
 	}
 
 	public int getOrigX() {
