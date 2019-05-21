@@ -5,8 +5,8 @@ import java.awt.Graphics;
 import java.util.Random;
 
 public class Tank extends GameObject {
-	public static final int WIDTH = ResourceMgr.TANK_D.getWidth();
-	public static final int HEIGHT = ResourceMgr.TANK_D.getHeight();
+	public static final int WIDTH = ResourceMgr.BAD_TANK_D.getWidth();
+	public static final int HEIGHT = ResourceMgr.BAD_TANK_D.getHeight();
 	private static final int SPEED = PropertyMgr.getInt("tankSpeed");
 	private static final Random RANDOM = new Random();
 	private static final int RANDOM_BASE_NUMBER = PropertyMgr.getInt("randomBaseNumber");
@@ -110,14 +110,14 @@ public class Tank extends GameObject {
 	@Override
 	public void paint(Graphics g) {
 		switch (dir) {
-		case LEFT: 		 g.drawImage(ResourceMgr.TANK_L, x, y, null);	break;
-		case RIGHT: 	 g.drawImage(ResourceMgr.TANK_R, x, y, null);	break;
-		case UP: 		 g.drawImage(ResourceMgr.TANK_U, x, y, null);	break;
-		case DOWN:  	 g.drawImage(ResourceMgr.TANK_D, x, y, null);	break;
-		case LEFT_UP: 	 g.drawImage(ResourceMgr.TANK_LU, x, y, null);  break;
-		case RIGHT_UP: 	 g.drawImage(ResourceMgr.TANK_RU, x, y, null);	break;
-		case LEFT_DOWN:  g.drawImage(ResourceMgr.TANK_LD, x, y, null);	break;
-		case RIGHT_DOWN: g.drawImage(ResourceMgr.TANK_RD, x, y, null);	break;
+		case LEFT: 		 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_L : ResourceMgr.BAD_TANK_L, x, y, null);	break;
+		case RIGHT: 	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_R : ResourceMgr.BAD_TANK_R, x, y, null);	break;
+		case UP: 		 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_U : ResourceMgr.BAD_TANK_U, x, y, null);	break;
+		case DOWN:  	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_D : ResourceMgr.BAD_TANK_D, x, y, null);	break;
+		case LEFT_UP: 	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_LU : ResourceMgr.BAD_TANK_LU, x, y, null);	break;
+		case RIGHT_UP: 	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_RU : ResourceMgr.BAD_TANK_RU, x, y, null);	break;
+		case LEFT_DOWN:  g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_LD : ResourceMgr.BAD_TANK_LD, x, y, null);	break;
+		case RIGHT_DOWN: g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_RD : ResourceMgr.BAD_TANK_RD, x, y, null);	break;
 		default:
 			break;
 		}

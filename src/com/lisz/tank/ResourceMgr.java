@@ -7,14 +7,23 @@ import javax.imageio.ImageIO;
 
 
 public class ResourceMgr {
-	public static BufferedImage TANK_L;
-	public static BufferedImage TANK_U;
-	public static BufferedImage TANK_R;
-	public static BufferedImage TANK_D;
-	public static BufferedImage TANK_LU;
-	public static BufferedImage TANK_RU;
-	public static BufferedImage TANK_RD;
-	public static BufferedImage TANK_LD;
+	public static BufferedImage BAD_TANK_L;
+	public static BufferedImage BAD_TANK_U;
+	public static BufferedImage BAD_TANK_R;
+	public static BufferedImage BAD_TANK_D;
+	public static BufferedImage BAD_TANK_LU;
+	public static BufferedImage BAD_TANK_RU;
+	public static BufferedImage BAD_TANK_RD;
+	public static BufferedImage BAD_TANK_LD;
+	
+	public static BufferedImage GOOD_TANK_L;
+	public static BufferedImage GOOD_TANK_U;
+	public static BufferedImage GOOD_TANK_R;
+	public static BufferedImage GOOD_TANK_D;
+	public static BufferedImage GOOD_TANK_LU;
+	public static BufferedImage GOOD_TANK_RU;
+	public static BufferedImage GOOD_TANK_RD;
+	public static BufferedImage GOOD_TANK_LD;
 	
 	public static BufferedImage BULLET_L;
 	public static BufferedImage BULLET_U;
@@ -31,14 +40,23 @@ public class ResourceMgr {
 	
 	static {
 		try {
-			TANK_U = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/BadTank1.png"));
-			TANK_R = ImageUtil.rotateImage(TANK_U, 90);
-			TANK_L = ImageUtil.rotateImage(TANK_U, -90);
-			TANK_D = ImageUtil.rotateImage(TANK_U, 180);
-			TANK_LU = ImageUtil.rotateImage(TANK_U, -45);
-			TANK_RU = ImageUtil.rotateImage(TANK_U, 45);
-			TANK_RD = ImageUtil.rotateImage(TANK_U, 135);
-			TANK_LD = ImageUtil.rotateImage(TANK_U, -135);
+			BAD_TANK_U = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/BadTank1.png"));
+			BAD_TANK_R = ImageUtil.rotateImage(BAD_TANK_U, 90);
+			BAD_TANK_L = ImageUtil.rotateImage(BAD_TANK_U, -90);
+			BAD_TANK_D = ImageUtil.rotateImage(BAD_TANK_U, 180);
+			BAD_TANK_LU = ImageUtil.rotateImage(BAD_TANK_U, -45);
+			BAD_TANK_RU = ImageUtil.rotateImage(BAD_TANK_U, 45);
+			BAD_TANK_RD = ImageUtil.rotateImage(BAD_TANK_U, 135);
+			BAD_TANK_LD = ImageUtil.rotateImage(BAD_TANK_U, -135);
+			
+			GOOD_TANK_U = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/GoodTank1.png"));
+			GOOD_TANK_R = ImageUtil.rotateImage(GOOD_TANK_U, 90);
+			GOOD_TANK_L = ImageUtil.rotateImage(GOOD_TANK_U, -90);
+			GOOD_TANK_D = ImageUtil.rotateImage(GOOD_TANK_U, 180);
+			GOOD_TANK_LU = ImageUtil.rotateImage(GOOD_TANK_U, -45);
+			GOOD_TANK_RU = ImageUtil.rotateImage(GOOD_TANK_U, 45);
+			GOOD_TANK_RD = ImageUtil.rotateImage(GOOD_TANK_U, 135);
+			GOOD_TANK_LD = ImageUtil.rotateImage(GOOD_TANK_U, -135);
 			
 			BULLET_U = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.png"));
 			BULLET_R = ImageUtil.rotateImage(BULLET_U, 90);
