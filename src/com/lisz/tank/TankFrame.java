@@ -26,7 +26,7 @@ public class TankFrame extends Frame {
 	private GameObject tank = new Tank(INIT_X, INIT_Y, Dir.UP, this, Group.GOOD);
 	public List<GameObject> gameObjects = new ArrayList<>();//new HashSet<>();
 	private Image offScreenImage = null;
-	
+	public static long rounds = 0;
 	
 	public TankFrame() {
 		setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -71,6 +71,7 @@ public class TankFrame extends Frame {
 		gOffScreen.setColor(c);
 		paint(gOffScreen);
 		g.drawImage(offScreenImage, 0, 0, null);
+		rounds ++;
 	}
 	
 	@Override

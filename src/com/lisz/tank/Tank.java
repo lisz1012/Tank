@@ -5,8 +5,8 @@ import java.awt.Graphics;
 import java.util.Random;
 
 public class Tank extends GameObject {
-	public static final int WIDTH = ResourceMgr.BAD_TANK_D.getWidth();
-	public static final int HEIGHT = ResourceMgr.BAD_TANK_D.getHeight();
+	public static final int WIDTH = ResourceMgr.BAD_TANK_D_1.getWidth();
+	public static final int HEIGHT = ResourceMgr.BAD_TANK_D_1.getHeight();
 	private static final int SPEED = PropertyMgr.getInt("tankSpeed");
 	private static final Random RANDOM = new Random();
 	private static final int RANDOM_BASE_NUMBER = PropertyMgr.getInt("randomBaseNumber");
@@ -109,17 +109,10 @@ public class Tank extends GameObject {
 
 	@Override
 	public void paint(Graphics g) {
-		switch (dir) {
-		case LEFT: 		 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_L : ResourceMgr.BAD_TANK_L, x, y, null);	break;
-		case RIGHT: 	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_R : ResourceMgr.BAD_TANK_R, x, y, null);	break;
-		case UP: 		 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_U : ResourceMgr.BAD_TANK_U, x, y, null);	break;
-		case DOWN:  	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_D : ResourceMgr.BAD_TANK_D, x, y, null);	break;
-		case LEFT_UP: 	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_LU : ResourceMgr.BAD_TANK_LU, x, y, null);	break;
-		case RIGHT_UP: 	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_RU : ResourceMgr.BAD_TANK_RU, x, y, null);	break;
-		case LEFT_DOWN:  g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_LD : ResourceMgr.BAD_TANK_LD, x, y, null);	break;
-		case RIGHT_DOWN: g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_RD : ResourceMgr.BAD_TANK_RD, x, y, null);	break;
-		default:
-			break;
+		if (TankFrame.rounds % 20 < 10) {
+			paintTanks1(g);
+		} else {
+			paintTanks2(g);
 		}
 		if (group == Group.GOOD) {
 			Color c = g.getColor();
@@ -140,6 +133,36 @@ public class Tank extends GameObject {
 		}
 	}
 
+	private void paintTanks1(Graphics g) {
+		switch (dir) {
+		case LEFT: 		 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_L_1 : ResourceMgr.BAD_TANK_L_1, x, y, null);	break;
+		case RIGHT: 	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_R_1 : ResourceMgr.BAD_TANK_R_1, x, y, null);	break;
+		case UP: 		 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_U_1 : ResourceMgr.BAD_TANK_U_1, x, y, null);	break;
+		case DOWN:  	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_D_1 : ResourceMgr.BAD_TANK_D_1, x, y, null);	break;
+		case LEFT_UP: 	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_LU_1 : ResourceMgr.BAD_TANK_LU_1, x, y, null);	break;
+		case RIGHT_UP: 	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_RU_1 : ResourceMgr.BAD_TANK_RU_1, x, y, null);	break;
+		case LEFT_DOWN:  g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_LD_1 : ResourceMgr.BAD_TANK_LD_1, x, y, null);	break;
+		case RIGHT_DOWN: g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_RD_1 : ResourceMgr.BAD_TANK_RD_1, x, y, null);	break;
+		default:
+			break;
+		}
+	}
+	
+	private void paintTanks2(Graphics g) {
+		switch (dir) {
+		case LEFT: 		 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_L_2 : ResourceMgr.BAD_TANK_L_2, x, y, null);	break;
+		case RIGHT: 	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_R_2 : ResourceMgr.BAD_TANK_R_2, x, y, null);	break;
+		case UP: 		 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_U_2 : ResourceMgr.BAD_TANK_U_2, x, y, null);	break;
+		case DOWN:  	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_D_2 : ResourceMgr.BAD_TANK_D_2, x, y, null);	break;
+		case LEFT_UP: 	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_LU_2 : ResourceMgr.BAD_TANK_LU_2, x, y, null);	break;
+		case RIGHT_UP: 	 g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_RU_2 : ResourceMgr.BAD_TANK_RU_2, x, y, null);	break;
+		case LEFT_DOWN:  g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_LD_2 : ResourceMgr.BAD_TANK_LD_2, x, y, null);	break;
+		case RIGHT_DOWN: g.drawImage(group == Group.GOOD ? ResourceMgr.GOOD_TANK_RD_2 : ResourceMgr.BAD_TANK_RD_2, x, y, null);	break;
+		default:
+			break;
+		}
+	}
+	
 	public Cannon getCannon() {
 		return cannon;
 	}
