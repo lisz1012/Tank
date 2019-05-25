@@ -25,6 +25,12 @@ public class Tank extends GameObject {
 		height = HEIGHT;
 	}
 	
+	// 构造己方坦克发射厉害的子弹专用
+	public Tank (int x, int y, Dir dir, TankFrame tf, Group group, Cannon cannon) {
+		this(x, y, dir, tf, group);
+		this.cannon = cannon;
+	}
+	
 	@Override
 	public void move() {
 		if (!moving) return;

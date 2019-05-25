@@ -3,7 +3,7 @@ package com.lisz.tank;
 import java.io.IOException;
 import java.util.Properties;
 
-public class PropertyMgr {
+public class PropertyMgr <T>{
 	static Properties props = new Properties();
 	static {
 		try {
