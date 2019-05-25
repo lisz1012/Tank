@@ -152,6 +152,13 @@ public class TankFrame extends Frame {
 			Dir dir = calculateDir();
 			tank.setDir(dir);
 			setTankFire(e);
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_G:
+				generateEnemies(ENEMY_COUNT);
+				break;
+			default:
+				break;
+			}
 		}
 		
 		private void setDirKeyPressedStatus(KeyEvent e, boolean keyPressed) {
