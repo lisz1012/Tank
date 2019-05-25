@@ -1,6 +1,7 @@
 package com.lisz.tank;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
 public class PropertyMgr <T>{
@@ -16,6 +17,18 @@ public class PropertyMgr <T>{
 	
 	public static int getInt(String key) {
 		return Integer.parseInt(props.get(key).toString());
+	}
+	
+	public static Cannon getCannon(String key) {
+		String cannonName = props.get(key).toString();
+		Cannon cannon = null;
+		try {
+			cannon = (Cannon)Class.forName(cannonName).getMethod("getInstance").invoke(null);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return cannon;
 	}
 	
 	public static void main(String[] args) {

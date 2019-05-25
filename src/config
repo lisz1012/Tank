@@ -11,3 +11,6 @@ initY=500
 backGroundRedComponent=137
 backGroundGreenComponent=71
 backGroundBlueComponent=1
+#Fire strategies
+goodCannon=com.lisz.tank.EightDirectionCannon
+badCannon=com.lisz.tank.DefaultCannon

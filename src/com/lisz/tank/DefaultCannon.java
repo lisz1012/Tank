@@ -1,6 +1,13 @@
 package com.lisz.tank;
 
 public class DefaultCannon implements Cannon {
+	private static final Cannon INSTANCE = new DefaultCannon();
+	
+	private DefaultCannon() {}
+	
+	public static Cannon getInstance() {
+		return INSTANCE;
+	}
 
 	@Override
 	public void fire(Tank tank) {

@@ -12,7 +12,7 @@ public class Tank extends GameObject {
 	private static final int RANDOM_BASE_NUMBER = PropertyMgr.getInt("randomBaseNumber");
 	private static final int RESET_DIR_POSSIBILITY = PropertyMgr.getInt("resetDirPossibility");
 	private static final int FIRE_POSSIBILITY = PropertyMgr.getInt("firePossibility");
-	private Cannon cannon = new DefaultCannon();
+	private Cannon cannon = PropertyMgr.getCannon("badCannon");
 	
 	public Tank (int x, int y, Dir dir, TankFrame tf, Group group) {
 		this.x = x;
