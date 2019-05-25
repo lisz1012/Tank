@@ -22,9 +22,7 @@ public class TankFrame extends Frame {
 	private static final int INIT_Y = PropertyMgr.getInt("initY");
 	private static final Color BACK_GROUND_COLOR = new Color(PropertyMgr.getInt("backGroundRedComponent"), 
 			PropertyMgr.getInt("backGroundGreenComponent"), PropertyMgr.getInt("backGroundBlueComponent"));
-	public static final Cannon SUPER_CANNON = new EightDirectionCannon();
-	public static final Cannon NUCLEAR_CANNON = new NuclearCannon();
-	private Tank tank = new Tank(INIT_X, INIT_Y, Dir.UP, this, Group.GOOD, SUPER_CANNON);
+	private Tank tank = new Tank(INIT_X, INIT_Y, Dir.UP, this, Group.GOOD, EightDirectionCannon.getInstance());
 	public List<GameObject> gameObjects = new ArrayList<>();//new HashSet<>();
 	private Image offScreenImage = null;
 	public static long rounds = 0;
