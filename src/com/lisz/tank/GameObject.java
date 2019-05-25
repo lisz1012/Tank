@@ -75,13 +75,9 @@ public abstract class GameObject implements GameModel {
 				   o.getY() > y - o.getHeight() && o.getY() < y + height;
 		if (hit && ((o instanceof Bullet) && (this instanceof Tank) || (o instanceof Tank) && (this instanceof Bullet)) 
 				&& group != o.group) {
-			live = false;
-			o.setLive(false);
-			if (this instanceof Tank) {
-				tf.gameObjects.add(new Explosion(x, y));
-			} else {
-				tf.gameObjects.add(new Explosion(o.x, o.y));
-			}
+			
+			die();
+			o.die();
 		} else if (hit && (o instanceof Tank) && (this instanceof Tank)) {
 			x = origX;
 			y = origY;
@@ -102,4 +98,8 @@ public abstract class GameObject implements GameModel {
 		return origY;
 	}
 
+	@Override
+	public void die() {
+		live = false;
+	}
 }

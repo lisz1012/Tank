@@ -43,7 +43,7 @@ public class Bullet extends GameObject {
 		default:break;
 		}
 		if (outOfBound(tf)) {
-			live = false;
+			die();
 		}
 	}
 

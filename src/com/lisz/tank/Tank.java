@@ -170,4 +170,10 @@ public class Tank extends GameObject {
 	public void setCannon(Cannon cannon) {
 		this.cannon = cannon;
 	}
+	
+	@Override
+	public void die() {
+		super.die();
+		tf.gameObjects.add(new Explosion(x, y));
+	}
 }

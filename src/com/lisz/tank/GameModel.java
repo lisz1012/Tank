@@ -16,4 +16,5 @@ public interface GameModel {
 	void fire();
 	boolean hit(GameObject o);
 	boolean outOfBound(TankFrame tf);
+	void die();
 }

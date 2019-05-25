@@ -20,7 +20,7 @@ public class Explosion extends GameObject {
 		g.drawImage(ResourceMgr.EXPLOSION_IMGS[state++], x, y, null);
 		g.setColor(c);
 		if (state == ResourceMgr.EXPLOSION_IMGS.length) {
-			live = false;
+			die();
 		}
 	}
 
