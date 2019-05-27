@@ -73,12 +73,12 @@ public abstract class GameObject implements GameModel {
 	public boolean hit(GameObject o) {
 		boolean hit = o.getX() > x - o.getWidth() && o.getX() < x + width && 
 				   o.getY() > y - o.getHeight() && o.getY() < y + height;
-		if (hit && ((o instanceof AdvancedBullet) && (this instanceof Tank) || (o instanceof Tank) && (this instanceof AdvancedBullet)) 
+		if (hit && ((Bullet.class.isAssignableFrom(o.getClass())) && (Tank.class.isAssignableFrom(this.getClass())) || (Tank.class.isAssignableFrom(o.getClass())) && (Bullet.class.isAssignableFrom(this.getClass()))) 
 				&& group != o.group) {
 			
 			die();
 			o.die();
-		} else if (hit && (o instanceof Tank) && (this instanceof Tank)) {
+		} else if (hit && (Tank.class.isAssignableFrom(o.getClass())) && (Tank.class.isAssignableFrom(this.getClass()))) {
 			x = origX;
 			y = origY;
 		}
