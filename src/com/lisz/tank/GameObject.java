@@ -73,7 +73,7 @@ public abstract class GameObject implements GameModel {
 	public boolean hit(GameObject o) {
 		boolean hit = o.getX() > x - o.getWidth() && o.getX() < x + width && 
 				   o.getY() > y - o.getHeight() && o.getY() < y + height;
-		if (hit && ((o instanceof Bullet) && (this instanceof Tank) || (o instanceof Tank) && (this instanceof Bullet)) 
+		if (hit && ((o instanceof AdvancedBullet) && (this instanceof Tank) || (o instanceof Tank) && (this instanceof AdvancedBullet)) 
 				&& group != o.group) {
 			
 			die();

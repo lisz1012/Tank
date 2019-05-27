@@ -13,7 +13,7 @@ public class EightDirectionCannon implements Cannon {
 	public void fire(Tank tank) {
 		Dir dirs[] = Dir.values();
 		for (Dir dir : dirs) {
-			tank.tf.gameObjects.add(new Bullet(dir, tank.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2, tank.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2, tank.tf, tank.group));
+			tank.tf.gameObjects.add(TankFrame.GAME_OBJECT_FACTORY.createBullet(dir, tank.getX() + Tank.WIDTH / 2 - AdvancedBullet.WIDTH / 2, tank.getY() + Tank.HEIGHT / 2 - AdvancedBullet.HEIGHT / 2, tank.tf, tank.group));
 		}
 	}
 
