@@ -17,9 +17,9 @@ public class Explosion extends GameObject {
 	@Override
 	public void paint(Graphics g) {
 		Color c = g.getColor();
-		g.drawImage(ResourceMgr.EXPLOSION_IMGS[state++], x, y, null);
+		g.drawImage(ResourceMgr.ADVANCED_EXPLOSION_IMGS[state++], x, y, null);
 		g.setColor(c);
-		if (state == ResourceMgr.EXPLOSION_IMGS.length) {
+		if (state == ResourceMgr.ADVANCED_EXPLOSION_IMGS.length) {
 			die();
 		}
 	}

@@ -4,8 +4,8 @@ import java.awt.Graphics;
 
 public class Bullet extends GameObject {
 	private static final int SPEED = 15;
-	public static final int WIDTH = ResourceMgr.BULLET_D.getWidth();
-	public static final int HEIGHT = ResourceMgr.BULLET_D.getHeight();
+	public static final int WIDTH = ResourceMgr.ADVANCED_BULLET_D.getWidth();
+	public static final int HEIGHT = ResourceMgr.ADVANCED_BULLET_D.getHeight();
 	
 	public Bullet(Dir dir, int x, int y, TankFrame tf, Group group) {
 		super();
@@ -50,14 +50,14 @@ public class Bullet extends GameObject {
 	@Override
 	public void paint(Graphics g) {
 		switch (dir) {
-		case LEFT: 		 g.drawImage(ResourceMgr.BULLET_L, x, y, null);	break;
-		case RIGHT: 	 g.drawImage(ResourceMgr.BULLET_R, x, y, null);	break;
-		case UP: 		 g.drawImage(ResourceMgr.BULLET_U, x, y, null);	break;
-		case DOWN:  	 g.drawImage(ResourceMgr.BULLET_D, x, y, null);	break;
-		case LEFT_UP: 	 g.drawImage(ResourceMgr.BULLET_LU, x, y, null);  break;
-		case RIGHT_UP: 	 g.drawImage(ResourceMgr.BULLET_RU, x, y, null);	break;
-		case LEFT_DOWN:  g.drawImage(ResourceMgr.BULLET_LD, x, y, null);	break;
-		case RIGHT_DOWN: g.drawImage(ResourceMgr.BULLET_RD, x, y, null);	break;
+		case LEFT: 		 g.drawImage(ResourceMgr.ADVANCED_BULLET_L, x, y, null);	break;
+		case RIGHT: 	 g.drawImage(ResourceMgr.ADVANCED_BULLET_R, x, y, null);	break;
+		case UP: 		 g.drawImage(ResourceMgr.ADVANCED_BULLET_U, x, y, null);	break;
+		case DOWN:  	 g.drawImage(ResourceMgr.ADVANCED_BULLET_D, x, y, null);	break;
+		case LEFT_UP: 	 g.drawImage(ResourceMgr.ADVANCED_BULLET_LU, x, y, null);  break;
+		case RIGHT_UP: 	 g.drawImage(ResourceMgr.ADVANCED_BULLET_RU, x, y, null);	break;
+		case LEFT_DOWN:  g.drawImage(ResourceMgr.ADVANCED_BULLET_LD, x, y, null);	break;
+		case RIGHT_DOWN: g.drawImage(ResourceMgr.ADVANCED_BULLET_RD, x, y, null);	break;
 		default:
 			break;
 		}

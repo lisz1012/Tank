@@ -13,6 +13,7 @@ import java.util.List;
 
 
 public class TankFrame extends Frame {
+	public static final GameObjectFactory GAME_OBJECT_FACTORY = new AdvancedGameObjectFactory();
 	private static final long serialVersionUID = 1L;
 	private static final int GAME_WIDTH = PropertyMgr.getInt("gameWidth");
 	private static final int GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
@@ -22,7 +23,7 @@ public class TankFrame extends Frame {
 	private static final int INIT_Y = PropertyMgr.getInt("initY");
 	private static final Color BACK_GROUND_COLOR = new Color(PropertyMgr.getInt("backGroundRedComponent"), 
 			PropertyMgr.getInt("backGroundGreenComponent"), PropertyMgr.getInt("backGroundBlueComponent"));
-	private Tank tank = new Tank(INIT_X, INIT_Y, Dir.UP, this, Group.GOOD, PropertyMgr.getCannon("goodCannon"));
+	private Tank tank = GAME_OBJECT_FACTORY.createTank(INIT_X, INIT_Y, Dir.UP, this, Group.GOOD, PropertyMgr.getCannon("goodCannon"));
 	public List<GameObject> gameObjects = new ArrayList<>();//new HashSet<>();
 	private Image offScreenImage = null;
 	public static long rounds = 0;
@@ -50,7 +51,7 @@ public class TankFrame extends Frame {
 
 	private void generateEnemies(int enemyCount) {
 		for (int i = 0; i < enemyCount; i++) {
-			Tank enemy = new Tank(50 + 65 * i, 100, Dir.DOWN, this, Group.BAD);
+			Tank enemy = GAME_OBJECT_FACTORY.createTank(50 + 65 * i, 100, Dir.DOWN, this, Group.BAD);
 			enemy.setMoving(true);
 			gameObjects.add(enemy);
 		}
