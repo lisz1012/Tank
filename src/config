@@ -14,3 +14,5 @@ backGroundBlueComponent=1
 #Fire strategies
 goodCannon=com.lisz.tank.EightDirectionCannon
 badCannon=com.lisz.tank.DefaultCannon
+#Game object factory config
+gameObjectFactory=com.lisz.tank.AdvancedGameObjectFactory

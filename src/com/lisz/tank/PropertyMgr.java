@@ -31,6 +31,18 @@ public class PropertyMgr <T>{
 		return cannon;
 	}
 	
+	public static GameObjectFactory getGameObjectFactory(String key) {
+		String gameObjectFactoryName = props.get(key).toString();
+		GameObjectFactory gameObjectFactory = null;
+		try {
+			gameObjectFactory = (GameObjectFactory)Class.forName(gameObjectFactoryName).getDeclaredConstructor().newInstance();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return gameObjectFactory;
+	}
+	
 	public static void main(String[] args) {
 		System.out.println(PropertyMgr.getInt("initEnemyTankCount"));
 	}

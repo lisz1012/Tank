@@ -13,7 +13,7 @@ import java.util.List;
 
 
 public class TankFrame extends Frame {
-	public static final GameObjectFactory GAME_OBJECT_FACTORY = new DefaultGameObjectFactory();
+	public static final GameObjectFactory GAME_OBJECT_FACTORY = PropertyMgr.getGameObjectFactory("gameObjectFactory");
 	private static final long serialVersionUID = 1L;
 	private static final int GAME_WIDTH = PropertyMgr.getInt("gameWidth");
 	private static final int GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
