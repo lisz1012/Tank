@@ -11,8 +11,8 @@ public class NuclearCannon implements Cannon {
 
 	@Override
 	public void fire(Tank tank) {
-		for (int i = 0; i < tank.facade.gameObjects.size(); i++) {
-			GameObject object = tank.facade.gameObjects.get(i);
+		for (int i = 0; i < GameFacade.GAME_OBJECTS.size(); i++) {
+			GameObject object = GameFacade.GAME_OBJECTS.get(i);
 			if (object instanceof Tank && object != tank) {
 				Tank t = (Tank)object;
 				t.die();

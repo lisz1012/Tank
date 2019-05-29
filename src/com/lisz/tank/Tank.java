@@ -180,6 +180,6 @@ public class Tank extends GameObject {
 	@Override
 	public void die() {
 		super.die();
-		facade.gameObjects.add(new Explosion(x, y));
+		GameFacade.GAME_OBJECTS.add(new Explosion(x, y));
 	}
 }

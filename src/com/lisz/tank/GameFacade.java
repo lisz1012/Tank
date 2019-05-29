@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameFacade {
-	public List<GameObject> gameObjects = new ArrayList<>();
+	public static final List<GameObject> GAME_OBJECTS = new ArrayList<>();
 	public static long rounds = 0;
 	public TankFrame tf;
 	
@@ -18,7 +18,7 @@ public class GameFacade {
 	}
 	
 	public void initGameObjects(Tank tank, int enemyCount) {
-		gameObjects.add(tank);
+		GAME_OBJECTS.add(tank);
 		generateEnemies(enemyCount);
 	}
 
@@ -26,24 +26,24 @@ public class GameFacade {
 		for (int i = 0; i < enemyCount; i++) {
 			Tank enemy = new Tank(50 + 65 * i, 100, Dir.DOWN, this, Group.BAD);
 			enemy.setMoving(true);
-			gameObjects.add(enemy);
+			GAME_OBJECTS.add(enemy);
 		}
 	}
 	
 	public void calculateHit() {
-		for (int i = 0; i < gameObjects.size(); i++) {
-			GameObject gameObject = gameObjects.get(i);
-			for (int j = i + 1; j < gameObjects.size(); j++) {
-				GameObject other = gameObjects.get(j);
+		for (int i = 0; i < GAME_OBJECTS.size(); i++) {
+			GameObject gameObject = GAME_OBJECTS.get(i);
+			for (int j = i + 1; j < GAME_OBJECTS.size(); j++) {
+				GameObject other = GAME_OBJECTS.get(j);
 				gameObject.hit(other);
 			}
 		}
 	}
 	
 	public void removeDeadGameObjects() {
-		for (int i = gameObjects.size() - 1; i >= 0; i--) {
-			if (!gameObjects.get(i).isLive()) {
-				gameObjects.remove(i);
+		for (int i = GAME_OBJECTS.size() - 1; i >= 0; i--) {
+			if (!GAME_OBJECTS.get(i).isLive()) {
+				GAME_OBJECTS.remove(i);
 			}
 		}
 	}

@@ -63,14 +63,14 @@ public class TankFrame extends Frame {
 		Color c = g.getColor();
 		g.setColor(Color.WHITE);
 		g.drawString("方向键移动，A键开炮!", 10, 40);
-		g.drawString("Object的数量" + FACADE.gameObjects.size(), 10, 60);
+		g.drawString("Object的数量" + GameFacade.GAME_OBJECTS.size(), 10, 60);
 		g.setColor(c);
 		
 		FACADE.calculateHit();
 		FACADE.removeDeadGameObjects();
 		
-		for (int i = 0; i < FACADE.gameObjects.size(); i++) {
-			FACADE.gameObjects.get(i).paint(g);
+		for (int i = 0; i < GameFacade.GAME_OBJECTS.size(); i++) {
+			GameFacade.GAME_OBJECTS.get(i).paint(g);
 		}
 	}
 	

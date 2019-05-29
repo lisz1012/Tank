@@ -16,7 +16,7 @@ public class DefaultCannon implements Cannon {
 		} else {
 			tank.tf.gameObjects.add(new Bullet(tank.getDir(), tank.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2, tank.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2, tank.tf, tank.group));
 		}*/
-		tank.facade.gameObjects.add(new Bullet(tank.getDir(), tank.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2, tank.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2, tank.facade, tank.group));
+		GameFacade.GAME_OBJECTS.add(new Bullet(tank.getDir(), tank.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2, tank.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2, tank.facade, tank.group));
 	}
 
 }
