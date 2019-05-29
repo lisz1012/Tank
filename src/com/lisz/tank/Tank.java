@@ -14,11 +14,11 @@ public class Tank extends GameObject {
 	private static final int FIRE_POSSIBILITY = PropertyMgr.getInt("firePossibility");
 	private Cannon cannon = PropertyMgr.getCannon("badCannon");
 	
-	public Tank (int x, int y, Dir dir, TankFrame tf, Group group) {
+	public Tank (int x, int y, Dir dir, GameFacade facade, Group group) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		this.tf = tf;
+		this.facade = facade;
 		live = true;
 		this.group = group;
 		width = WIDTH;
@@ -26,8 +26,8 @@ public class Tank extends GameObject {
 	}
 	
 	// 构造己方坦克发射厉害的子弹专用
-	public Tank (int x, int y, Dir dir, TankFrame tf, Group group, Cannon cannon) {
-		this(x, y, dir, tf, group);
+	public Tank (int x, int y, Dir dir, GameFacade facade, Group group, Cannon cannon) {
+		this(x, y, dir, facade, group);
 		this.cannon = cannon;
 	}
 	
@@ -47,7 +47,7 @@ public class Tank extends GameObject {
 		case LEFT_DOWN: x -= SPEED; y += SPEED; break;
 		default:break;
 		}
-		if (outOfBound(tf)) {
+		if (outOfBound(facade.tf)) {
 			x = origX;
 			y = origY;
 		}
@@ -115,7 +115,7 @@ public class Tank extends GameObject {
 
 	@Override
 	public void paint(Graphics g) {
-		if (TankFrame.rounds % 20 < 10) {
+		if (GameFacade.rounds % 20 < 10) {
 			paintTanks1(g);
 		} else {
 			paintTanks2(g);
@@ -180,6 +180,6 @@ public class Tank extends GameObject {
 	@Override
 	public void die() {
 		super.die();
-		tf.gameObjects.add(new Explosion(x, y));
+		facade.gameObjects.add(new Explosion(x, y));
 	}
 }

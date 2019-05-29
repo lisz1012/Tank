@@ -11,7 +11,7 @@ public abstract class GameObject implements GameModel {
 	protected int height;
 	protected boolean live;
 	protected Dir dir = Dir.UP;
-	protected TankFrame tf;
+	protected GameFacade facade;
 	protected boolean moving = false;
 	protected Group group;
 	
