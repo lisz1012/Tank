@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameFacade {
+	private static final GameFacade INSTANCE;
 	private static final int INIT_X = PropertyMgr.getInt("initX");
 	private static final int INIT_Y = PropertyMgr.getInt("initY");
 	private Tank tank = new Tank(INIT_X, INIT_Y, Dir.UP, this, Group.GOOD, PropertyMgr.getCannon("goodCannon"));
@@ -14,9 +15,18 @@ public class GameFacade {
 	private int gameWidth;
 	private int gameHeight;
 
-	public GameFacade(int gameWidth, int gameHeight) {
-		this.gameWidth = gameWidth;
-		this.gameHeight = gameHeight;
+	static {
+		INSTANCE = new GameFacade();
+	}
+	private GameFacade() {}
+	
+	public static GameFacade getInstance(int gameWidth, int gameHeight) {
+		if (INSTANCE.gameWidth != 0 && INSTANCE.gameHeight != 0) {
+			return INSTANCE;
+		}
+		INSTANCE.gameWidth = gameWidth;
+		INSTANCE.gameHeight = gameHeight;
+		return INSTANCE;
 	}
 
 	public void paint(Graphics g) {
