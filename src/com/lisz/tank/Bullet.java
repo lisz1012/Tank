@@ -7,12 +7,12 @@ public class Bullet extends GameObject {
 	public static final int WIDTH = ResourceMgr.BULLET_D.getWidth();
 	public static final int HEIGHT = ResourceMgr.BULLET_D.getHeight();
 	
-	public Bullet(Dir dir, int x, int y, TankFrame tf, Group group) {
+	public Bullet(Dir dir, int x, int y, GameFacade facade, Group group) {
 		super();
 		this.dir = dir;
 		this.x = x;
 		this.y = y;
-		this.tf = tf;
+		this.facade = facade;
 		this.group = group;
 		live = true;
 		moving = true;
@@ -42,7 +42,7 @@ public class Bullet extends GameObject {
 		case LEFT_DOWN: x -= SPEED; y += SPEED; break;
 		default:break;
 		}
-		if (outOfBound(tf)) {
+		if (outOfBound(facade)) {
 			die();
 		}
 	}

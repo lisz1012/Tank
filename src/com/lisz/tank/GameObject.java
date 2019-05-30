@@ -11,7 +11,7 @@ public abstract class GameObject implements GameModel {
 	protected int height;
 	protected boolean live;
 	protected Dir dir = Dir.UP;
-	protected TankFrame tf;
+	protected GameFacade facade;
 	protected boolean moving = false;
 	protected Group group;
 	
@@ -86,8 +86,8 @@ public abstract class GameObject implements GameModel {
 	}
 	
 	@Override
-	public boolean outOfBound(TankFrame tf) {
-		return x + width > tf.getWidth() || x < 0 || y + height > tf.getHeight() || y < 20;
+	public boolean outOfBound(GameFacade facade) {
+		return x + width > facade.getGameWidth() || x < 0 || y + height > facade.getGameHeight() || y < 20;
 	}
 
 	public int getOrigX() {
