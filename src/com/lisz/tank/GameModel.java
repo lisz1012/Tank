@@ -14,7 +14,6 @@ public interface GameModel {
 	boolean isMoving();
 	void setMoving(boolean moving);
 	void fire();
-	boolean hit(GameObject o);
 	boolean outOfBound(GameFacade facade);
 	void die();
 }

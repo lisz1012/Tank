@@ -15,6 +15,14 @@ public abstract class GameObject implements GameModel {
 	protected boolean moving = false;
 	protected Group group;
 	
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+
 	public boolean isLive() {
 		return live;
 	}
@@ -69,22 +77,6 @@ public abstract class GameObject implements GameModel {
 
 	public abstract void fire() ;
 
-	@Override
-	public boolean hit(GameObject o) {
-		boolean hit = o.getX() > x - o.getWidth() && o.getX() < x + width && 
-				   o.getY() > y - o.getHeight() && o.getY() < y + height;
-		if (hit && ((o instanceof Bullet) && (this instanceof Tank) || (o instanceof Tank) && (this instanceof Bullet)) 
-				&& group != o.group) {
-			
-			die();
-			o.die();
-		} else if (hit && (o instanceof Tank) && (this instanceof Tank)) {
-			x = origX;
-			y = origY;
-		}
-		return hit;
-	}
-	
 	@Override
 	public boolean outOfBound(GameFacade facade) {
 		return x + width > facade.getGameWidth() || x < 0 || y + height > facade.getGameHeight() || y < 20;
