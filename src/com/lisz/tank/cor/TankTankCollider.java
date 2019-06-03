@@ -22,6 +22,9 @@ public class TankTankCollider extends AbstractGameObjectCollider {
 			Tank t = (Tank)o1;
 			t.setX(t.getOrigX());
 			t.setY(t.getOrigY());
+			t = (Tank)o2;
+			t.setX(t.getOrigX());
+			t.setY(t.getOrigY());
 		}
 	}
 
