@@ -17,15 +17,13 @@ public class TankTankCollider extends AbstractGameObjectCollider {
 	}
 
 	@Override
-	public void collide(GameObject o1, GameObject o2) {
-		if (isEnactable(o1, o2)) {
-			Tank t = (Tank)o1;
-			t.setX(t.getOrigX());
-			t.setY(t.getOrigY());
-			t = (Tank)o2;
-			t.setX(t.getOrigX());
-			t.setY(t.getOrigY());
-		}
+	public void collideImpl(GameObject o1, GameObject o2) {
+		Tank t = (Tank)o1;
+		t.setX(t.getOrigX());
+		t.setY(t.getOrigY());
+		t = (Tank)o2;
+		t.setX(t.getOrigX());
+		t.setY(t.getOrigY());
 	}
 
 }

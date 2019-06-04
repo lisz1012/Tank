@@ -7,11 +7,9 @@ import com.lisz.tank.Tank;
 public class BulletTankCollider extends AbstractGameObjectCollider {
 
 	@Override
-	public void collide(GameObject o1, GameObject o2) {
-		if (isEnactable(o1, o2)) {
-			o1.die();
-			o2.die();
-		}
+	public void collideImpl(GameObject o1, GameObject o2) {
+		o1.die();
+		o2.die();
 	}
 
 	@Override
@@ -24,6 +22,4 @@ public class BulletTankCollider extends AbstractGameObjectCollider {
 	public boolean typeMatch(GameObject o1, GameObject o2) {
 		return (o1 instanceof Bullet) && (o2 instanceof Tank) || (o1 instanceof Tank) && (o2 instanceof Bullet);
 	}
-
-	
 }

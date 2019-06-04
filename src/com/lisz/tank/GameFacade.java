@@ -5,9 +5,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lisz.tank.cor.BulletTankCollider;
-import com.lisz.tank.cor.Collider;
-import com.lisz.tank.cor.TankTankCollider;
+import com.lisz.tank.cor.ColliderChain;
 
 public class GameFacade {
 	private static final GameFacade INSTANCE;
@@ -18,15 +16,12 @@ public class GameFacade {
 	public static long rounds = 0;
 	private int gameWidth;
 	private int gameHeight;
-	private List<Collider> colliders = new ArrayList<>();
+	private ColliderChain chain = new ColliderChain();
 
 	static {
 		INSTANCE = new GameFacade();
 	}
-	private GameFacade() {
-		colliders.add(new TankTankCollider());
-		colliders.add(new BulletTankCollider());
-	}
+	private GameFacade() {}
 	
 	public static GameFacade getInstance(int gameWidth, int gameHeight) {
 		if (INSTANCE.gameWidth != 0 && INSTANCE.gameHeight != 0) {
@@ -48,9 +43,7 @@ public class GameFacade {
 			GameObject gameObject = gameObjects.get(i);
 			for (int j = i + 1; j < gameObjects.size(); j++) {
 				GameObject other = gameObjects.get(j);
-				for (Collider collider : colliders) {
-					collider.collide(gameObject, other);
-				}
+				chain.collide(gameObject, other);
 			}
 		}
 		
