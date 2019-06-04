@@ -1,17 +1,17 @@
 package com.lisz.tank.cor;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import com.lisz.tank.GameObject;
+import com.lisz.tank.PropertyMgr;
 
 
 public class ColliderChain extends AbstractGameObjectCollider {
-	private List<Collider> colliders = new LinkedList<>();
+	private static final String COLLIDERS_KEY = "colliders";
+	private List<Collider> colliders;
 
 	public ColliderChain() {
-		add(new TankTankCollider()).
-		add(new BulletTankCollider());
+		colliders = PropertyMgr.getColliders(COLLIDERS_KEY);
 	}
 
 	public ColliderChain add(Collider collider) {

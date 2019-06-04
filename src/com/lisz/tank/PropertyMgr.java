@@ -2,7 +2,11 @@ package com.lisz.tank;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Properties;
+
+import com.lisz.tank.cor.Collider;
 
 public class PropertyMgr <T>{
 	static Properties props = new Properties();
@@ -29,6 +33,24 @@ public class PropertyMgr <T>{
 			e.printStackTrace();
 		}
 		return cannon;
+	}
+	
+	public static List<Collider> getColliders(String key) {
+		String collidersStr = props.get(key).toString();
+		String collidersStrs[] = collidersStr.split(",");
+		List<Collider> colliders = new LinkedList<>();
+		for (String colliderStr : collidersStrs) {
+			try {
+				Collider collider = (Collider)Class.forName(colliderStr).getConstructor().newInstance();
+				colliders.add(collider);
+			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+					| InvocationTargetException | NoSuchMethodException | SecurityException
+					| ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return colliders;
 	}
 	
 	public static void main(String[] args) {
