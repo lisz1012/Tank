@@ -187,4 +187,9 @@ public class Tank extends GameObject {
 		super.die();
 		facade.gameObjects.add(new Explosion(x, y));
 	}
+	
+	public void back() {
+		x = origX;
+		y = origY;
+	}
 }
