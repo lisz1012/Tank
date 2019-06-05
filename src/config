@@ -15,4 +15,6 @@ backGroundBlueComponent=1
 goodCannon=com.lisz.tank.EightDirectionCannon
 badCannon=com.lisz.tank.DefaultCannon
 #colliders
-colliders=com.lisz.tank.cor.BulletTankCollider,com.lisz.tank.cor.TankTankCollider
+colliders=com.lisz.tank.cor.BulletTankCollider,com.lisz.tank.cor.TankTankCollider,com.lisz.tank.cor.TankWallCollider,com.lisz.tank.cor.BulletWallCollider
+#walls
+walls=100,180,30,320-400,180,30,320

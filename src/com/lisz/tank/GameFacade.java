@@ -11,6 +11,7 @@ public class GameFacade {
 	private static final GameFacade INSTANCE;
 	private static final int INIT_X = PropertyMgr.getInt("initX");
 	private static final int INIT_Y = PropertyMgr.getInt("initY");
+	private static final List<Wall> WALLS = PropertyMgr.getWalls();
 	private Tank tank = new Tank(INIT_X, INIT_Y, Dir.UP, this, Group.GOOD, PropertyMgr.getCannon("goodCannon"));
 	public List<GameObject> gameObjects = new ArrayList<>();//new HashSet<>();
 	public static long rounds = 0;
@@ -64,6 +65,10 @@ public class GameFacade {
 			enemy.setMoving(true);
 			gameObjects.add(enemy);
 		}
+	}
+	
+	public void buildWalls() {
+		gameObjects.addAll(WALLS);
 	}
 
 	public Tank getMyTank() {

@@ -2,6 +2,7 @@ package com.lisz.tank;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -9,7 +10,11 @@ import java.util.Properties;
 import com.lisz.tank.cor.Collider;
 
 public class PropertyMgr <T>{
-	static Properties props = new Properties();
+	private static Properties props = new Properties();
+	private static final String WALLS_KEY = "walls";
+	private static final String OBJECT_SEPARATOR = "-";
+	private static final String PROPERTY_SEPARATOR = ",";
+	
 	static {
 		try {
 			props.load(PropertyMgr.class.getClassLoader().getResourceAsStream("config"));
@@ -55,5 +60,17 @@ public class PropertyMgr <T>{
 	
 	public static void main(String[] args) {
 		System.out.println(PropertyMgr.getInt("initEnemyTankCount"));
+	}
+
+	public static List<Wall> getWalls() {
+		String allWallsStr = props.getProperty(WALLS_KEY);
+		String walls[] = allWallsStr.split(OBJECT_SEPARATOR);
+		List<Wall> wallList = new ArrayList<>();
+		for (String wall : walls) {
+			String strs[] = wall.split(PROPERTY_SEPARATOR);
+			wallList.add(new Wall(Integer.parseInt(strs[0]), Integer.parseInt(strs[1]), 
+					Integer.parseInt(strs[2]), Integer.parseInt(strs[3])));
+		}
+		return wallList;
 	}
 }
