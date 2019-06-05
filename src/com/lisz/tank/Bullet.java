@@ -70,4 +70,11 @@ public class Bullet extends GameObject {
 		
 	}
 
+	public void dieWithExplosion() {
+		die();
+		Explosion explosion = new Explosion(x, y);
+		explosion.setX(x + width / 2 - explosion.getWidth() - 35);
+		explosion.setY(y + height / 2 - explosion.getHeight() - 50);
+		facade.gameObjects.add(explosion);
+	}
 }

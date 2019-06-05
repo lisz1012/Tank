@@ -1,9 +1,7 @@
 package com.lisz.tank.cor;
 
 import com.lisz.tank.Bullet;
-import com.lisz.tank.Explosion;
 import com.lisz.tank.GameObject;
-import com.lisz.tank.Tank;
 import com.lisz.tank.Wall;
 
 public class BulletWallCollider extends AbstractGameObjectCollider {
@@ -21,11 +19,10 @@ public class BulletWallCollider extends AbstractGameObjectCollider {
 	@Override
 	void collideImpl(GameObject o1, GameObject o2) {
 		if (o1 instanceof Bullet) {
-			o1.die();
+			((Bullet)o1).dieWithExplosion();
 		} else {
-			o2.die();
+			((Bullet)o2).dieWithExplosion();
 		}
-		//facade.gameObjects.add(new Explosion(x, y));
 	}
 
 }
