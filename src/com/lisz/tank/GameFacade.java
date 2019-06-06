@@ -20,16 +20,15 @@ public class GameFacade {
 	private ColliderChain chain = new ColliderChain();
 
 	static {
-		INSTANCE = new GameFacade();
+		INSTANCE = new GameFacade(TankFrame.GAME_WIDTH, TankFrame.GAME_HEIGHT);
 	}
-	private GameFacade() {}
 	
-	public static GameFacade getInstance(int gameWidth, int gameHeight) {
-		if (INSTANCE.gameWidth != 0 && INSTANCE.gameHeight != 0) {
-			return INSTANCE;
-		}
-		INSTANCE.gameWidth = gameWidth;
-		INSTANCE.gameHeight = gameHeight;
+	private GameFacade(int gameWidth, int gameHeight) {
+		this.gameWidth = gameWidth;
+		this.gameHeight = gameHeight;
+	}
+	
+	public static GameFacade getInstance() {
 		return INSTANCE;
 	}
 

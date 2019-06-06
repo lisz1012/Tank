@@ -12,9 +12,9 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
 	private static final long serialVersionUID = 1L;
-	private static final int GAME_WIDTH = PropertyMgr.getInt("gameWidth");
-	private static final int GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
-	private GameFacade facade = GameFacade.getInstance(GAME_WIDTH, GAME_HEIGHT);
+	public static final int GAME_WIDTH = PropertyMgr.getInt("gameWidth");
+	public static final int GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
+	private GameFacade facade = GameFacade.getInstance();
 	private Tank tank = facade.getMyTank();
 	private static final int ENEMY_COUNT = PropertyMgr.getInt("initEnemyTankCount");
 	private static final Audio BACK_GROUD_MUSIC = new BackGroundMusic("audio/war1.wav");
