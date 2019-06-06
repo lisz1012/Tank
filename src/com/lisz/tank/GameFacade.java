@@ -60,7 +60,7 @@ public class GameFacade {
 	
 	public void generateEnemies(int enemyCount) {
 		for (int i = 0; i < enemyCount; i++) {
-			Tank enemy = new Tank(50 + 65 * i, 100, Dir.DOWN, this, Group.BAD);
+			Tank enemy = new Tank(50 + 65 * i, 100, Dir.DOWN, Group.BAD);
 			enemy.setMoving(true);
 			gameObjects.add(enemy);
 		}

@@ -13,13 +13,11 @@ public class Tank extends GameObject {
 	private static final int RESET_DIR_POSSIBILITY = PropertyMgr.getInt("resetDirPossibility");
 	private static final int FIRE_POSSIBILITY = PropertyMgr.getInt("firePossibility");
 	private Cannon cannon = PropertyMgr.getCannon("badCannon");
-	private GameFacade facade;
 	
-	public Tank (int x, int y, Dir dir, GameFacade facade, Group group) {
+	public Tank (int x, int y, Dir dir, Group group) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		this.facade = facade;
 		live = true;
 		this.group = group;
 		width = WIDTH;
@@ -28,7 +26,7 @@ public class Tank extends GameObject {
 	
 	// 构造己方坦克发射厉害的子弹专用
 	public Tank (int x, int y, Dir dir, GameFacade facade, Group group, Cannon cannon) {
-		this(x, y, dir, facade, group);
+		this(x, y, dir, group);
 		this.cannon = cannon;
 	}
 	
@@ -48,7 +46,7 @@ public class Tank extends GameObject {
 		case LEFT_DOWN: x -= SPEED; y += SPEED; break;
 		default:break;
 		}
-		if (outOfBound(facade)) {
+		if (outOfBound(GameFacade.getInstance())) {
 			x = origX;
 			y = origY;
 		}
@@ -178,14 +176,10 @@ public class Tank extends GameObject {
 		this.cannon = cannon;
 	}
 	
-	public GameFacade getFacade() {
-		return facade;
-	}
-	
 	@Override
 	public void die() {
 		super.die();
-		facade.gameObjects.add(new Explosion(x, y));
+		GameFacade.getInstance().gameObjects.add(new Explosion(x, y));
 	}
 	
 	public void back() {
