@@ -9,6 +9,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.lisz.tank.decorator.BloodDecorator;
+
 
 public class TankFrame extends Frame {
 	private static final long serialVersionUID = 1L;
@@ -40,7 +42,8 @@ public class TankFrame extends Frame {
 	}
 	
 	private void initGameObjects() {
-		facade.gameObjects.add(tank);
+		BloodDecorator decorator = new BloodDecorator(tank);
+		facade.gameObjects.add(decorator);
 		facade.generateEnemies(ENEMY_COUNT);
 		facade.buildWalls();
 	}

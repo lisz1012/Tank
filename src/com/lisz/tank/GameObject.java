@@ -9,7 +9,7 @@ public abstract class GameObject implements GameModel {
 	protected int origY;
 	protected int width;
 	protected int height;
-	protected boolean live;
+	protected boolean live = true;
 	protected Dir dir = Dir.UP;
 	protected boolean moving = false;
 	protected Group group;

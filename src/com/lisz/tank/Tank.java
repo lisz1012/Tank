@@ -119,12 +119,12 @@ public class Tank extends GameObject {
 		} else {
 			paintTanks2(g);
 		}
-		if (group == Group.GOOD) {
+		/*if (group == Group.GOOD) {
 			Color c = g.getColor();
 			g.setColor(Color.RED);
 			g.drawString("My Tank", x, y);
 			g.setColor(c);
-		}
+		}*/
 		move();
 	}
 
