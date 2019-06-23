@@ -105,6 +105,7 @@ public class GameFacade {
 			gameObjects = (List<GameObject>)ois.readObject();
 			// Load之后其他的物体都好说，自己的坦克一定要更新，否则tank不在gameObject中，按键不听使唤
 			// TankFrame中还要用下面这里的tank更新它里面的我方坦克
+			// 先写进去的先被读出来，TankFrame中最开始的时候是最先把自己的坦克加进gameObjects中的
 			tank = (Tank)gameObjects.get(0);
 		} catch (IOException e) {
 			e.printStackTrace();
