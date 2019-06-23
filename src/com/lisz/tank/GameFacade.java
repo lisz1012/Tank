@@ -3,8 +3,10 @@ package com.lisz.tank;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +94,21 @@ public class GameFacade {
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f))) {
 			oos.writeObject(gameObjects);
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void load() {
+		String pathname = this.getClass().getResource("/").getPath() + "game.data";
+		File f = new File(pathname);
+		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f))) {
+			gameObjects = (List<GameObject>)ois.readObject();
+			// Load之后其他的物体都好说，自己的坦克一定要更新，否则tank不在gameObject中，按键不听使唤
+			// TankFrame中还要用下面这里的tank更新它里面的我方坦克
+			tank = (Tank)gameObjects.get(0);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}

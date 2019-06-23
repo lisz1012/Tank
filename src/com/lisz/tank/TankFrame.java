@@ -69,6 +69,14 @@ public class TankFrame extends Frame {
 		facade.paint(g);
 	}
 	
+	public Tank getTank() {
+		return tank;
+	}
+
+	public void setTank(Tank tank) {
+		this.tank = tank;
+	}
+	
 	private class MyKeyListener extends KeyAdapter {
 		private boolean bL = false;
 		private boolean bU = false;
@@ -80,7 +88,8 @@ public class TankFrame extends Frame {
 			int key = e.getKeyCode();
 			switch (key) {
 			case KeyEvent.VK_S: facade.save(); break;
-			//case KeyEvent.VK_L: facade.load(); break;
+			// Load之后其他的物体都好说，自己的坦克一定要更新，否则tank不在gameObject中，按键不听使唤
+			case KeyEvent.VK_L: facade.load(); tank = facade.getMyTank(); break;
 			case KeyEvent.VK_UP:	// 这里利用一下case穿透
 			case KeyEvent.VK_DOWN:
 			case KeyEvent.VK_LEFT:
