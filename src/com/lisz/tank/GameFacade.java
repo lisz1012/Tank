@@ -2,6 +2,10 @@ package com.lisz.tank;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,5 +84,15 @@ public class GameFacade {
 
 	public int getGameHeight() {
 		return gameHeight;
+	}
+	
+	public void save() {
+		String pathname = this.getClass().getResource("/").getPath() + "game.data";
+		File f = new File(pathname);
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f))) {
+			oos.writeObject(gameObjects);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

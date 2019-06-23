@@ -1,8 +1,13 @@
 package com.lisz.tank;
 
 import java.awt.Graphics;
+import java.io.Serializable;
 
-public abstract class GameObject implements GameModel {
+public abstract class GameObject implements GameModel, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8993260124653925220L;
 	protected int x = 200;
 	protected int y = 200;
 	protected int origX;

@@ -1,5 +1,7 @@
 package com.lisz.tank;
 
-public interface Cannon {
+import java.io.Serializable;
+
+public interface Cannon extends Serializable {
 	void fire(Tank tank);
 }

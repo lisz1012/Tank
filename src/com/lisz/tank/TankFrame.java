@@ -77,6 +77,10 @@ public class TankFrame extends Frame {
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_S) {
+				facade.save();
+				return;
+			}
 			if (!tank.isLive()) return;
 			setDirKeyPressedStatus(e, true);
 			Dir dir = calculateDir();
