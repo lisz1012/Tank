@@ -77,16 +77,24 @@ public class TankFrame extends Frame {
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
-			if (e.getKeyCode() == KeyEvent.VK_S) {
-				facade.save();
-				return;
-			}
-			if (!tank.isLive()) return;
-			setDirKeyPressedStatus(e, true);
-			Dir dir = calculateDir();
-			tank.setDir(dir);
-			if (tank.isMoving()) {
-				new Thread(()->new Audio("audio/tank_move.wav").play()).start();
+			int key = e.getKeyCode();
+			switch (key) {
+			case KeyEvent.VK_S: facade.save(); break;
+			//case KeyEvent.VK_L: facade.load(); break;
+			case KeyEvent.VK_UP:	// 这里利用一下case穿透
+			case KeyEvent.VK_DOWN:
+			case KeyEvent.VK_LEFT:
+			case KeyEvent.VK_RIGHT:
+				if (!tank.isLive()) return;
+				setDirKeyPressedStatus(e, true);
+				Dir dir = calculateDir();
+				tank.setDir(dir);
+				if (tank.isMoving()) {
+					new Thread(()->new Audio("audio/tank_move.wav").play()).start();
+				}
+				break;
+			default:
+				break;
 			}
 		}
 
