@@ -2,6 +2,7 @@ package com.lisz.tank;
 
 import java.awt.Graphics;
 import java.io.Serializable;
+import java.util.UUID;
 
 public abstract class GameObject implements GameModel, Serializable {
 	/**
@@ -18,7 +19,12 @@ public abstract class GameObject implements GameModel, Serializable {
 	protected Dir dir = Dir.UP;
 	protected boolean moving = false;
 	protected Group group;
+	protected UUID id = UUID.randomUUID();
 	
+	public UUID getId() {
+		return id;
+	}
+
 	public Group getGroup() {
 		return group;
 	}
