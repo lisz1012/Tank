@@ -16,7 +16,7 @@ public class TankFrame extends Frame {
 	public static final int GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
 	private GameFacade facade = GameFacade.getInstance();
 	private Tank tank = facade.getMyTank();
-	private static final int ENEMY_COUNT = PropertyMgr.getInt("initEnemyTankCount");
+	//private static final int ENEMY_COUNT = PropertyMgr.getInt("initEnemyTankCount");
 	private static final Audio BACK_GROUD_MUSIC = new BackGroundMusic("audio/war1.wav");
 	private Image offScreenImage = null;
 	private static final Color BACK_GROUND_COLOR = new Color(PropertyMgr.getInt("backGroundRedComponent"), 
@@ -41,7 +41,7 @@ public class TankFrame extends Frame {
 	
 	private void initGameObjects() {
 		facade.gameObjects.add(tank);
-		facade.generateEnemies(ENEMY_COUNT);
+		//facade.generateEnemies(ENEMY_COUNT);
 		facade.buildWalls();
 	}
 
@@ -141,13 +141,13 @@ public class TankFrame extends Frame {
 			Dir dir = calculateDir();
 			tank.setDir(dir);
 			setTankFire(e);
-			switch (e.getKeyCode()) {
+			/*switch (e.getKeyCode()) {
 			case KeyEvent.VK_G:
 				facade.generateEnemies(ENEMY_COUNT);
 				break;
 			default:
 				break;
-			}
+			}*/
 		}
 		
 		private void setDirKeyPressedStatus(KeyEvent e, boolean keyPressed) {
