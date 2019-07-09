@@ -12,7 +12,7 @@ backGroundRedComponent=137
 backGroundGreenComponent=71
 backGroundBlueComponent=1
 #Fire strategies
-goodCannon=com.lisz.tank.EightDirectionCannon
+goodCannon=com.lisz.tank.DefaultCannon
 badCannon=com.lisz.tank.DefaultCannon
 #colliders
 colliders=com.lisz.tank.cor.BulletTankCollider,com.lisz.tank.cor.TankTankCollider,com.lisz.tank.cor.TankWallCollider,com.lisz.tank.cor.BulletWallCollider
