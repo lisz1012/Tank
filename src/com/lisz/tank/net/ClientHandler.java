@@ -26,9 +26,12 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 				TankJoinMessage message = (TankJoinMessage)msg;
 				Tank tank = new Tank(message.getX(), message.getY(), message.getDir(), message.getGroup());
 				tank.setId(message.getId());
-				tank.setMoving(message.isMoving());
-				GameFacade.getInstance().gameObjects.add(tank);
-				System.out.println("New tank: " + tank);
+				if (!GameFacade.getInstance().gameObjects.contains(tank)) {
+					tank.setMoving(message.isMoving());
+					GameFacade.getInstance().gameObjects.add(tank);
+					System.out.println("New tank: " + tank);
+					ctx.writeAndFlush(new TankJoinMessage(TankFrame.tank));
+				}
 			} finally {
 				ReferenceCountUtil.release(msg);
 			}

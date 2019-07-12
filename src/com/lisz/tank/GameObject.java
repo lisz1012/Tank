@@ -108,4 +108,18 @@ public abstract class GameObject implements GameModel, Serializable {
 	public void die() {
 		live = false;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof GameObject)) {
+			return false;
+		}
+		GameObject o = (GameObject)obj;
+		return id.equals(o.getId());
+	}
+	
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
 }

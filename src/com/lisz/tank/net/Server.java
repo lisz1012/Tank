@@ -27,7 +27,7 @@ public class Server {
 		 .childHandler(new ChannelInitializer<SocketChannel>() {
 			@Override
 			protected void initChannel(SocketChannel ch) throws Exception {
-				ch.pipeline()//.addLast(new TankMessageDecoder())
+				ch.pipeline()//.addLast(new TankJoinMessageEncoder())
 							 .addLast(new ServerHandler());
 				CLIENTS.add(ch);
 			}
