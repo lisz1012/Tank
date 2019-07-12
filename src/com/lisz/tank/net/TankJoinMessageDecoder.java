@@ -19,7 +19,7 @@ public class TankJoinMessageDecoder extends ByteToMessageDecoder {
 
 	@Override
 	protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {//decode每个字节过来的时候触发一次
-		if (in.readableBytes() < 33) {
+		if (in.readableBytes() < TankJoinMessage.SIZE) {
 			return;
 		}
 		//in.markReaderIndex();

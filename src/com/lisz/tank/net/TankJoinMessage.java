@@ -9,6 +9,7 @@ import com.lisz.tank.Group;
 import com.lisz.tank.Tank;
 
 public class TankJoinMessage {
+	public static final int SIZE = 33;
 	private int x, y;
 	private Dir dir;
 	private boolean moving;
