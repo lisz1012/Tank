@@ -5,8 +5,6 @@
  */
 package com.lisz.tank.net;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,10 +28,6 @@ public class TankJoinMessageDecoder extends ByteToMessageDecoder {
 		int ordinal = in.readInt();
 		boolean moving = in.readBoolean();
 		int groupOrdinal = in.readInt();
-		System.out.println(Integer.toBinaryString(x));
-		System.out.println(Integer.toBinaryString(y));
-		System.out.println(Integer.toBinaryString(ordinal));
-		System.out.println(Integer.toBinaryString(groupOrdinal));
 		Dir dir = Dir.values()[ordinal];
 		Group group = Group.values()[groupOrdinal];
 		UUID id = new UUID(in.readLong(), in.readLong());

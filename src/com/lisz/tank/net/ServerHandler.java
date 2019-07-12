@@ -1,11 +1,8 @@
 package com.lisz.tank.net;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.group.ChannelMatchers;
-import io.netty.util.CharsetUtil;
 
 public class ServerHandler extends ChannelInboundHandlerAdapter {
 
@@ -29,7 +26,6 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 		String str = "Server received: " + message;
 		ServerFrame.INSTANCE.updateClientMessage(str);*/
 		Server.CLIENTS.writeAndFlush(msg, ChannelMatchers.isNot(ctx.channel()));//不要回发给发消息过来的那个client
-		//Server.CLIENTS.writeAndFlush(msg);
 	}
 	
 	@Override

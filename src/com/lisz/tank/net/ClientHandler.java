@@ -21,22 +21,9 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 	
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {//ctx代表Channel目前运行的网络环境
-		System.out.println("Is Tank Message : " + (msg instanceof TankJoinMessage));
-		System.out.println(msg.getClass().getName());
 		if (msg instanceof TankJoinMessage) {
 			try {																		
 				TankJoinMessage message = (TankJoinMessage)msg;
-				/*for (int i = 0; i < GameFacade.getInstance().gameObjects.size(); i++) {
-					if (GameFacade.getInstance().gameObjects.get(i).getId().equals(message.getId())) {
-						Tank tank = (Tank)GameFacade.getInstance().gameObjects.get(i);
-						tank.setX(message.getX());
-						tank.setY(message.getY());
-						tank.setDir(message.getDir());
-						tank.setMoving(message.isMoving());
-						tank.setGroup(message.getGroup());
-						break;
-					}
-				}*/
 				Tank tank = new Tank(message.getX(), message.getY(), message.getDir(), message.getGroup());
 				tank.setId(message.getId());
 				tank.setMoving(message.isMoving());
