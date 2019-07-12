@@ -9,18 +9,22 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.lisz.tank.net.Client;
+
 
 public class TankFrame extends Frame {
 	private static final long serialVersionUID = 1L;
 	public static final int GAME_WIDTH = PropertyMgr.getInt("gameWidth");
 	public static final int GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
-	private GameFacade facade = GameFacade.getInstance();
-	private Tank tank = facade.getMyTank();
+	private  static final GameFacade FACADE = GameFacade.getInstance();
+	//Random tank
+	public static Tank tank = FACADE.getMyTank();
 	//private static final int ENEMY_COUNT = PropertyMgr.getInt("initEnemyTankCount");
 	private static final Audio BACK_GROUD_MUSIC = new BackGroundMusic("audio/war1.wav");
 	private Image offScreenImage = null;
 	private static final Color BACK_GROUND_COLOR = new Color(PropertyMgr.getInt("backGroundRedComponent"), 
 			PropertyMgr.getInt("backGroundGreenComponent"), PropertyMgr.getInt("backGroundBlueComponent"));
+	private static final Client CLIENT = Client.getInstance();
 	
 	
 	public TankFrame() {
@@ -37,12 +41,15 @@ public class TankFrame extends Frame {
 		addKeyListener(new MyKeyListener());
 		initGameObjects();
 		new Thread(BACK_GROUD_MUSIC).start();
+		new Thread(() -> {
+			CLIENT.connect();
+		}) .start();
 	}
 	
 	private void initGameObjects() {
-		facade.gameObjects.add(tank);
+		FACADE.gameObjects.add(tank);
 		//facade.generateEnemies(ENEMY_COUNT);
-		facade.buildWalls();
+		FACADE.buildWalls();
 	}
 
 	
@@ -66,17 +73,9 @@ public class TankFrame extends Frame {
 	
 	@Override
 	public void paint(Graphics g) {
-		facade.paint(g);
-	}
-	
-	public Tank getTank() {
-		return tank;
+		FACADE.paint(g);
 	}
 
-	public void setTank(Tank tank) {
-		this.tank = tank;
-	}
-	
 	private class MyKeyListener extends KeyAdapter {
 		private boolean bL = false;
 		private boolean bU = false;

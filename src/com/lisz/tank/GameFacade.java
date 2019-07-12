@@ -10,20 +10,23 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.lisz.tank.cor.ColliderChain;
 
 public class GameFacade {
 	private static final GameFacade INSTANCE;
-	private static final int INIT_X = PropertyMgr.getInt("initX");
-	private static final int INIT_Y = PropertyMgr.getInt("initY");
+	//private static final int INIT_X = PropertyMgr.getInt("initX");
+	//private static final int INIT_Y = PropertyMgr.getInt("initY");
 	private static final List<Wall> WALLS = PropertyMgr.getWalls();
-	private Tank tank = new Tank(INIT_X, INIT_Y, Dir.UP, this, Group.GOOD, PropertyMgr.getCannon("goodCannon"));
+	//private Tank tank = new Tank(INIT_X, INIT_Y, Dir.UP, this, Group.GOOD, PropertyMgr.getCannon("goodCannon"));
+	private Tank tank = createTank();
 	public List<GameObject> gameObjects = new ArrayList<>();//new HashSet<>();
 	public static long rounds = 0;
 	private int gameWidth;
 	private int gameHeight;
 	private ColliderChain chain = new ColliderChain();
+	private static final Random RANDOM = new Random();
 
 	static {
 		INSTANCE = new GameFacade(TankFrame.GAME_WIDTH, TankFrame.GAME_HEIGHT);
@@ -34,6 +37,13 @@ public class GameFacade {
 		this.gameHeight = gameHeight;
 	}
 	
+	private Tank createTank() {
+		int x = 430 + RANDOM.nextInt(TankFrame.GAME_WIDTH - 430 - Tank.WIDTH);
+		int y = 500 + RANDOM.nextInt(TankFrame.GAME_HEIGHT - 550 - Tank.HEIGHT);
+		Group group = RANDOM.nextInt(100) % 2 == 0 ? Group.GOOD : Group.BAD;
+		return new Tank(x, y, Dir.UP, group);
+	}
+
 	public static GameFacade getInstance() {
 		return INSTANCE;
 	}

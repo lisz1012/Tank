@@ -21,6 +21,10 @@ public abstract class GameObject implements GameModel, Serializable {
 	protected Group group;
 	protected UUID id = UUID.randomUUID();
 	
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
 	public UUID getId() {
 		return id;
 	}

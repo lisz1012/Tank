@@ -13,13 +13,13 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		String str = "This is server, a client just connected to server. Assigning it the ID: " + Server.CLIENTS.size();
 		ServerFrame.INSTANCE.updateServerMessage(str);
-		ByteBuf buf = Unpooled.copiedBuffer((Server.CLIENTS.size() + "").getBytes());
-		ctx.writeAndFlush(buf);
+		//ByteBuf buf = Unpooled.copiedBuffer((Server.CLIENTS.size() + "").getBytes());//有这两句的话会写出去一个49，50.。。因为'1'的ascii码是49
+		//ctx.writeAndFlush(buf);
 	}
 	
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-		ByteBuf buf = (ByteBuf)msg;
+		/*ByteBuf buf = (ByteBuf)msg;
 		String message = buf.toString(CharsetUtil.UTF_8);
 		if (ProtocolMessage.CLOSE.getMessage().equals(message)) {
 			ServerFrame.INSTANCE.updateServerMessage("A client is disconnecting...");
@@ -27,8 +27,9 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 			return;
 		}
 		String str = "Server received: " + message;
-		ServerFrame.INSTANCE.updateClientMessage(str);
+		ServerFrame.INSTANCE.updateClientMessage(str);*/
 		Server.CLIENTS.writeAndFlush(msg, ChannelMatchers.isNot(ctx.channel()));//不要回发给发消息过来的那个client
+		//Server.CLIENTS.writeAndFlush(msg);
 	}
 	
 	@Override
