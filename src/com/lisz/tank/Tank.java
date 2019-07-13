@@ -133,7 +133,7 @@ public class Tank extends GameObject {
 		if (!live) return;
 		cannon.fire(this);
 		 // TODO change it when using image
-		if (group == Group.GOOD) {
+		if (this == TankFrame.tank) {
 			new Thread(new Audio("audio/tank_fire.wav")).start();
 		}
 	}
