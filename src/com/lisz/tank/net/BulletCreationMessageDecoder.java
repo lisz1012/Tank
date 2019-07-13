@@ -15,13 +15,14 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 
-public class TankJoinMessageDecoder extends ByteToMessageDecoder {
+public class BulletCreationMessageDecoder extends ByteToMessageDecoder {
 
 	@Override
-	public void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {//decode每个字节过来的时候触发一次
-		if (in.readableBytes() < TankJoinMessage.SIZE) {
+	protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {//decode每个字节过来的时候触发一次
+		if (in.readableBytes() < BulletCreationMessage.SIZE) {
 			return;
 		}
+//		in.markReaderIndex();
 		int x = in.readInt();
 		int y = in.readInt();
 		int ordinal = in.readInt();
@@ -30,7 +31,7 @@ public class TankJoinMessageDecoder extends ByteToMessageDecoder {
 		Dir dir = Dir.values()[ordinal];
 		Group group = Group.values()[groupOrdinal];
 		UUID id = new UUID(in.readLong(), in.readLong());
-		TankJoinMessage message = new TankJoinMessage(x, y, dir, moving, group, id);
+		BulletCreationMessage message = new BulletCreationMessage(x, y, dir, moving, group, id);
 		out.add(message);
 	}
 

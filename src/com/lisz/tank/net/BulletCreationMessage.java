@@ -5,24 +5,24 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
+import com.lisz.tank.Bullet;
 import com.lisz.tank.Dir;
 import com.lisz.tank.Group;
-import com.lisz.tank.Tank;
 
-public class TankJoinMessage extends Message {
-	public static final byte TYPE = 0;
+public class BulletCreationMessage extends Message {
 	public static final int SIZE = 33;
-	
-	public TankJoinMessage(Tank t){
-		x = t.getX();
-		y = t.getY();
-		dir = t.getDir();
-		moving = t.isMoving();
-		group = t.getGroup();
-		id = t.getId();
+	public static final byte TYPE = 1;
+
+	public BulletCreationMessage(Bullet b){
+		x = b.getX();
+		y = b.getY();
+		dir = b.getDir();
+		moving = b.isMoving();
+		group = b.getGroup();
+		id = b.getId();
 	}
 	
-	public TankJoinMessage (int x, int y, Dir dir, boolean moving, Group group, UUID id) {
+	public BulletCreationMessage (int x, int y, Dir dir, boolean moving, Group group, UUID id) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
@@ -31,17 +31,18 @@ public class TankJoinMessage extends Message {
 		this.id = id;
 	}
 	
-	public TankJoinMessage() {}
-	
+	public BulletCreationMessage() {}
+
 	@Override
 	public byte getType() {
 		return TYPE;
 	}
+
 	@Override
 	public int getSize() {
 		return SIZE;
 	}
-
+	
 	@Override
 	protected byte[] toBytesImpl(ByteArrayOutputStream baos, DataOutputStream dos) throws IOException{
 		dos.writeInt(x);
@@ -54,5 +55,4 @@ public class TankJoinMessage extends Message {
 		dos.flush();
 		return baos.toByteArray();
 	}
-	
 }

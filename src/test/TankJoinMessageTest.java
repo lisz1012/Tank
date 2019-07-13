@@ -48,6 +48,7 @@ class TankJoinMessageTest {
 		assertTrue(msg2.isMoving());
 		assertEquals(Group.GOOD, msg2.getGroup());
 		assertEquals(id, msg2.getId());*/
+		
 		EmbeddedChannel ch = new EmbeddedChannel();
 		UUID id = UUID.randomUUID();
 		TankJoinMessage msg = new TankJoinMessage(5, 10, Dir.UP, true, Group.GOOD, id);

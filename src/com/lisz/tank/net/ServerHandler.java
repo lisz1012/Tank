@@ -25,6 +25,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 		}
 		String str = "Server received: " + message;
 		ServerFrame.INSTANCE.updateClientMessage(str);*/
+		System.out.println("Message received: " + msg.getClass().getName());
 		Server.CLIENTS.writeAndFlush(msg, ChannelMatchers.isNot(ctx.channel()));//不要回发给发消息过来的那个client
 	}
 	

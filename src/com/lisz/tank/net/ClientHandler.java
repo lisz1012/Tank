@@ -1,5 +1,6 @@
 package com.lisz.tank.net;
 
+import com.lisz.tank.Bullet;
 import com.lisz.tank.GameFacade;
 import com.lisz.tank.Tank;
 import com.lisz.tank.TankFrame;
@@ -21,6 +22,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 	
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {//ctx代表Channel目前运行的网络环境
+		System.out.println("Type: " + msg.getClass().getName());
 		if (msg instanceof TankJoinMessage) {
 			try {																		
 				TankJoinMessage message = (TankJoinMessage)msg;
@@ -32,6 +34,15 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 					System.out.println("New tank: " + tank);
 					ctx.writeAndFlush(new TankJoinMessage(TankFrame.tank));
 				}
+			} finally {
+				ReferenceCountUtil.release(msg);
+			}
+		} else if (msg instanceof BulletCreationMessage) {
+			System.out.println("Other tank shot!");
+			try {
+				BulletCreationMessage message = (BulletCreationMessage) msg;
+				Bullet bullet = new Bullet(message.getDir(), message.getX(), message.getY(), message.getGroup());
+				GameFacade.getInstance().gameObjects.add(bullet);
 			} finally {
 				ReferenceCountUtil.release(msg);
 			}

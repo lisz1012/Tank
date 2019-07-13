@@ -44,6 +44,13 @@ public class Client {
 		f.channel().writeAndFlush(buf);
 	}
 	
+	public void send(BulletCreationMessage msg) {
+		if (f== null) {
+			return;
+		}
+		f.channel().writeAndFlush(msg);
+	}
+	
 	public static Client getInstance() {
 		return Inner.CLIENT;
 	}
