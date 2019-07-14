@@ -47,7 +47,7 @@ public class TankFrame extends Frame {
 	}
 	
 	private void initGameObjects() {
-		FACADE.gameObjects.add(tank);
+		FACADE.gameObjects.put(tank.getId(), tank);
 		//facade.generateEnemies(ENEMY_COUNT);
 		FACADE.buildWalls();
 	}

@@ -28,8 +28,8 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 				TankJoinMessage message = (TankJoinMessage)msg;
 				Tank tank = new Tank(message.getX(), message.getY(), message.getDir(), message.getGroup(), message.isMoving());
 				tank.setId(message.getId());
-				if (!GameFacade.getInstance().gameObjects.contains(tank)) {
-					GameFacade.getInstance().gameObjects.add(tank);
+				if (!GameFacade.getInstance().gameObjects.containsKey(tank.getId())) {
+					GameFacade.getInstance().gameObjects.put(tank.getId(), tank);
 					System.out.println("New tank: " + tank);
 					ctx.writeAndFlush(new TankJoinMessage(TankFrame.tank));
 				} else {
@@ -43,7 +43,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 			try {
 				BulletCreationMessage message = (BulletCreationMessage) msg;
 				Bullet bullet = new Bullet(message.getDir(), message.getX(), message.getY(), message.getGroup());
-				GameFacade.getInstance().gameObjects.add(bullet);
+				GameFacade.getInstance().gameObjects.put(bullet.getId(), bullet);
 			} finally {
 				ReferenceCountUtil.release(msg);
 			}

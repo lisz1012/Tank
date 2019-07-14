@@ -9,8 +9,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 
 import com.lisz.tank.cor.ColliderChain;
 
@@ -19,9 +23,10 @@ public class GameFacade {
 	//private static final int INIT_X = PropertyMgr.getInt("initX");
 	//private static final int INIT_Y = PropertyMgr.getInt("initY");
 	private static final List<Wall> WALLS = PropertyMgr.getWalls();
+	private static final List<UUID> OBJECTS_TO_BE_REMOVED = new ArrayList<>();
 	//private Tank tank = new Tank(INIT_X, INIT_Y, Dir.UP, this, Group.GOOD, PropertyMgr.getCannon("goodCannon"));
 	private Tank tank = createTank();
-	public List<GameObject> gameObjects = new ArrayList<>();//new HashSet<>();
+	public Map<UUID, GameObject> gameObjects = new HashMap<>();//new HashSet<>();
 	public static long rounds = 0;
 	private int gameWidth;
 	private int gameHeight;
@@ -55,34 +60,59 @@ public class GameFacade {
 		g.drawString("Object的数量" + gameObjects.size(), 10, 60);
 		g.setColor(c);
 		
-		for (int i = 0; i < gameObjects.size(); i++) {
+		/*for (int i = 0; i < gameObjects.size(); i++) {
 			GameObject gameObject = gameObjects.get(i);
 			for (int j = i + 1; j < gameObjects.size(); j++) {
 				GameObject other = gameObjects.get(j);
 				chain.collide(gameObject, other);
 			}
-		}
+		}*/
 		
-		for (int i = gameObjects.size() - 1; i >= 0; i--) {
-			if (!gameObjects.get(i).isLive()) {
-				gameObjects.remove(i);
+		for (GameObject o1 : gameObjects.values()) {
+			for (GameObject o2 : gameObjects.values()) {
+				if (o1 != o2) {
+					chain.collide(o1, o2);
+				}
 			}
 		}
 		
-		for (int i = 0; i < gameObjects.size(); i++) {
+		/*for (int i = gameObjects.size() - 1; i >= 0; i--) {
+			if (!gameObjects.get(i).isLive()) {
+				gameObjects.remove(i);
+			}
+		}*/
+		
+		for (GameObject o : gameObjects.values()) {
+			if (!o.isLive()) {
+				OBJECTS_TO_BE_REMOVED.add(o.getId());
+			}
+		}
+		
+		for (UUID id : OBJECTS_TO_BE_REMOVED) {
+			gameObjects.remove(id);
+		}
+		OBJECTS_TO_BE_REMOVED.clear();
+		
+		
+		
+		/*for (int i = 0; i < gameObjects.size(); i++) {
 			gameObjects.get(i).paint(g);
+		}*/
+		
+		for (GameObject o : gameObjects.values()) {
+			o.paint(g);
 		}
 	}
 	
 	public void generateEnemies(int enemyCount) {
 		for (int i = 0; i < enemyCount; i++) {
 			Tank enemy = new Tank(50 + 65 * i, 100, Dir.DOWN, Group.BAD, true);
-			gameObjects.add(enemy);
+			gameObjects.put(enemy.getId(), enemy);
 		}
 	}
 	
 	public void buildWalls() {
-		gameObjects.addAll(WALLS);
+		WALLS.stream().forEach((w)->gameObjects.put(w.getId(), w));
 	}
 
 	public Tank getMyTank() {
@@ -97,7 +127,8 @@ public class GameFacade {
 		return gameHeight;
 	}
 	
-	public void save() {
+	/*
+	 * public void save() {
 		String pathname = this.getClass().getResource("/").getPath() + "game.data";
 		File f = new File(pathname);
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f))) {
@@ -122,4 +153,5 @@ public class GameFacade {
 			e.printStackTrace();
 		}
 	}
+	*/
 }

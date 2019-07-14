@@ -1,6 +1,7 @@
 package com.lisz.tank;
 
 import java.awt.Graphics;
+import java.util.UUID;
 
 public class Bullet extends GameObject {
 	private static final int SPEED = 15;
@@ -74,6 +75,6 @@ public class Bullet extends GameObject {
 		Explosion explosion = new Explosion(x, y);
 		explosion.setX(x + width / 2 - explosion.getWidth() - 35);
 		explosion.setY(y + height / 2 - explosion.getHeight() - 50);
-		GameFacade.getInstance().gameObjects.add(explosion);
+		GameFacade.getInstance().gameObjects.put(explosion.getId(), explosion);
 	}
 }

@@ -20,7 +20,7 @@ public class DefaultCannon implements Cannon {
 			tank.tf.gameObjects.add(new Bullet(tank.getDir(), tank.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2, tank.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2, tank.tf, tank.group));
 		}*/
 		Bullet bullet = new Bullet(tank.getDir(), tank.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2, tank.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2, tank.group);
-		GameFacade.getInstance().gameObjects.add(bullet);
+		GameFacade.getInstance().gameObjects.put(bullet.getId(), bullet);
 		Client.getInstance().send(new BulletCreationMessage(bullet));
 	}
 
