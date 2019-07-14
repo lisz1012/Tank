@@ -33,7 +33,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 					System.out.println("New tank: " + tank);
 					ctx.writeAndFlush(new TankJoinMessage(TankFrame.tank));
 				} else {
-					
+					GameFacade.getInstance().gameObjects.put(tank.getId(), tank);
 				}
 			} finally {
 				ReferenceCountUtil.release(msg);

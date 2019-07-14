@@ -18,8 +18,8 @@ public class Tank extends GameObject {
 	private Cannon cannon = PropertyMgr.getCannon("badCannon");
 	
 	public Tank (int x, int y, Dir dir, Group group) {
-		this.x = x;
-		this.y = y;
+		this.x = origX = x;
+		this.y = origY = y;
 		this.dir = dir;
 		live = true;
 		this.group = group;
@@ -58,12 +58,15 @@ public class Tank extends GameObject {
 			x = origX;
 			y = origY;
 		}
+		/*
 		if (group == Group.BAD) {
 			resetDir();
 			fireRandomly();
 		}
+		*/
 	}
 	
+	/*
 	private void resetDir() {
 		int r = RANDOM.nextInt(RANDOM_BASE_NUMBER);
 		if (r > RESET_DIR_POSSIBILITY) {
@@ -89,6 +92,7 @@ public class Tank extends GameObject {
 			fire();
 		}
 	}
+	*/
 
 	@Override
 	public void setDir(Dir dir) {
