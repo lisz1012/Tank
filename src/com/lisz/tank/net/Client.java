@@ -44,7 +44,7 @@ public class Client {
 		f.channel().writeAndFlush(buf);
 	}
 	
-	public void send(BulletCreationMessage msg) {
+	public void send(Message msg) {
 		if (f== null) {
 			return;
 		}
@@ -58,4 +58,5 @@ public class Client {
 	private static final class Inner {
 		private static final Client CLIENT = new Client();
 	}
+
 }

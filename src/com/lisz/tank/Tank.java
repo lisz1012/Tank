@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
+import com.lisz.tank.net.Client;
+import com.lisz.tank.net.TankJoinMessage;
+
 public class Tank extends GameObject {
 	public static final int WIDTH = ResourceMgr.BAD_TANK_D_1.getWidth();
 	public static final int HEIGHT = ResourceMgr.BAD_TANK_D_1.getHeight();
@@ -30,6 +33,11 @@ public class Tank extends GameObject {
 		this.cannon = cannon;
 	}
 	
+	public Tank(int x, int y, Dir dir, Group group, boolean moving) {
+		this(x, y, dir, group);
+		this.moving = moving;
+	}
+
 	@Override
 	public void move() {
 		if (!moving) return;
@@ -109,6 +117,9 @@ public class Tank extends GameObject {
 	@Override
 	public void setMoving(boolean moving) {
 		if (!live) return;
+		if (this.moving != moving) {
+			Client.getInstance().send(new TankJoinMessage(this));
+		}
 		this.moving = moving;
 	}
 
