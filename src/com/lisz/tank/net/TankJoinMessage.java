@@ -60,15 +60,18 @@ public class TankJoinMessage extends Message {
 		return baos.toByteArray();
 	}
 
+	// ClientHandler策略模式移过来的
 	@Override
 	public void handle(ChannelHandlerContext ctx) {
 		Tank tank = new Tank(x, y, dir, group, moving);
 		tank.setId(id);
+		// 新坦克还没加进自己的gameObjects就加进来并且广播自己的状态，以便新坦克也能知道自己的存在
 		if (!GameFacade.getInstance().gameObjects.containsKey(tank.getId())) {
 			GameFacade.getInstance().gameObjects.put(tank.getId(), tank);
 			System.out.println("New tank: " + tank);
 			ctx.writeAndFlush(new TankJoinMessage(TankFrame.tank));
 		} else {
+			// 已经有了，那就说明这时有可能是有坦克更新状态导致发过来的这条消息，此时存入新的tank，更新
 			GameFacade.getInstance().gameObjects.put(tank.getId(), tank);
 		}
 	}
