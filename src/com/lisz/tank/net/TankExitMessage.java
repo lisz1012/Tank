@@ -10,7 +10,6 @@ import com.lisz.tank.GameFacade;
 import io.netty.channel.ChannelHandlerContext;
 
 public class TankExitMessage extends Message {
-	public static final int SIZE = 16;
 	public static final MessageType TYPE = MessageType.TANK_EXIT;
 	
 	public TankExitMessage(UUID id){
@@ -34,11 +33,6 @@ public class TankExitMessage extends Message {
 	@Override
 	public MessageType getType() {
 		return TYPE;
-	}
-
-	@Override
-	public int getSize() {
-		return SIZE;
 	}
 
 	@Override

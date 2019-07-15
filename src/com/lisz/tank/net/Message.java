@@ -74,9 +74,6 @@ public abstract class Message {
 
 	public abstract MessageType getType();
 	
-	public abstract int getSize();
-	
-	
 	public abstract void handle(ChannelHandlerContext ctx);
 	
 	@Override

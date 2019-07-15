@@ -11,7 +11,6 @@ import com.lisz.tank.Tank;
 import io.netty.channel.ChannelHandlerContext;
 
 public class TankMovingMessage extends Message {
-	public static final int SIZE = 17;
 	public static final MessageType TYPE = MessageType.TANK_MOVING;
 	
 	private UUID id;
@@ -40,11 +39,6 @@ public class TankMovingMessage extends Message {
 	@Override
 	public MessageType getType() {
 		return TYPE;
-	}
-
-	@Override
-	public int getSize() {
-		return SIZE;
 	}
 
 	// 此时已经在客户端decode了

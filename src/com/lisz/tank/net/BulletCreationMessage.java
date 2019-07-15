@@ -13,7 +13,6 @@ import com.lisz.tank.Group;
 import io.netty.channel.ChannelHandlerContext;
 
 public class BulletCreationMessage extends Message {
-	public static final int SIZE = 33;
 	public static final MessageType TYPE = MessageType.BULLET_CREATION;
 
 	public BulletCreationMessage(Bullet b){
@@ -41,11 +40,6 @@ public class BulletCreationMessage extends Message {
 		return TYPE;
 	}
 
-	@Override
-	public int getSize() {
-		return SIZE;
-	}
-	
 	@Override
 	public byte[] toBytes() {
 		try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
