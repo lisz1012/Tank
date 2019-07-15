@@ -10,7 +10,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import com.lisz.tank.net.Client;
+import com.lisz.tank.net.TankChangeDirMessage;
 import com.lisz.tank.net.TankJoinMessage;
+import com.lisz.tank.net.TankMovingMessage;
 
 
 public class TankFrame extends Frame {
@@ -101,8 +103,14 @@ public class TankFrame extends Frame {
 				setDirKeyPressedStatus(e, true);
 				Dir dir = calculateDir();
 				tank.setDir(dir);
-				if (tank.moving != origMoving || tank.dir != origDir) { //计算完了，只要是方向和开动状态有一个变了，就发消息，更新
+				/*if (tank.moving != origMoving || tank.dir != origDir) { //计算完了，只要是方向和开动状态有一个变了，就发消息，更新
 					Client.getInstance().send(new TankJoinMessage(tank));
+				}*/
+				if (tank.dir != origDir) {
+					Client.getInstance().send(new TankChangeDirMessage(tank.id, tank.dir));
+				}
+				if (tank.moving != origMoving) { //计算完了，只要是方向和开动状态有一个变了，就发消息，更新
+					Client.getInstance().send(new TankMovingMessage(tank.id, tank.moving));
 				}
 				if (tank.isMoving()) {
 					new Thread(()->new Audio("audio/tank_move.wav").play()).start();
