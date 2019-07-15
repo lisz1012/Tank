@@ -1,5 +1,7 @@
 package com.lisz.tank.net;
 
+import java.util.UUID;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -32,8 +34,13 @@ public class Client {
 		}
 	}
 	
-	public void closeConnection() {
-		send("_bye_");
+	public void closeConnection(UUID id) {
+		// 给其他玩家客户端发送离开消息，以便他们从他们的gameObjects中去除本玩家的tank
+		try {
+			send(new TankExitMessage(id)).sync();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void send(String msg) {

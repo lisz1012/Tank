@@ -10,7 +10,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import com.lisz.tank.net.Client;
-import com.lisz.tank.net.TankExitMessage;
 import com.lisz.tank.net.TankJoinMessage;
 
 
@@ -37,12 +36,7 @@ public class TankFrame extends Frame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				// 给其他玩家客户端发送离开消息，以便他们从他们的gameObjects中去除本玩家的tank
-				try {
-					Client.getInstance().send(new TankExitMessage(tank.id)).sync();
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
-				}
+				Client.getInstance().closeConnection(tank.id);
 				System.exit(0);
 			}
 		});
