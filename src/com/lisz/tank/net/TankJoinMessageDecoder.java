@@ -16,6 +16,15 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 
 public class TankJoinMessageDecoder extends ByteToMessageDecoder {
+	private TankJoinMessageDecoder() {}
+	
+	private static final class Inner {
+		private static final TankJoinMessageDecoder INSTANCE = new TankJoinMessageDecoder(); 
+	}
+	
+	public static TankJoinMessageDecoder getInstance() {
+		return Inner.INSTANCE;
+	}
 
 	@Override
 	public void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {//decode每个字节过来的时候触发一次

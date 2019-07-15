@@ -16,6 +16,16 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 
 public class BulletCreationMessageDecoder extends ByteToMessageDecoder {
+	
+	private BulletCreationMessageDecoder() {}
+	
+	private static final class Inner {
+		private static final BulletCreationMessageDecoder INSTANCE = new BulletCreationMessageDecoder();
+	}
+	
+	public static final BulletCreationMessageDecoder getInstance() {
+		return Inner.INSTANCE;
+	}
 
 	@Override
 	protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {//decode每个字节过来的时候触发一次

@@ -52,7 +52,7 @@ class TankJoinMessageTest {
 		EmbeddedChannel ch = new EmbeddedChannel();
 		UUID id = UUID.randomUUID();
 		TankJoinMessage msg = new TankJoinMessage(5, 10, Dir.UP, true, Group.GOOD, id);
-		ch.pipeline().addLast(new TankJoinMessageDecoder());
+		ch.pipeline().addLast(TankJoinMessageDecoder.getInstance());
 		ByteBuf buf = Unpooled.buffer();
 		buf.writeBytes(msg.toBytes());
 		ch.writeInbound(buf.duplicate());

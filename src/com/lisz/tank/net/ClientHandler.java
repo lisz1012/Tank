@@ -7,6 +7,13 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
 
 public class ClientHandler extends ChannelInboundHandlerAdapter {
+	private static final ClientHandler INSTANCE = new ClientHandler();
+	
+	private ClientHandler() {}
+	
+	public static ClientHandler getInstance() {
+		return INSTANCE;
+	}
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
