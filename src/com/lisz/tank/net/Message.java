@@ -22,20 +22,8 @@ public abstract class Message {
 	// 整个消息转化成字节数组，方便后面的调用.用ByteBuf的各种write方法也可以
 	// 但是这样的话就绑定在Netty上了。这里那天不想再用Netty了，方法还可以重用
 	// 2008年写的《大富翁》内部的存盘逻辑也是用的下面这两个流
-	public byte[] toBytes() {
-		try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			 DataOutputStream dos = new DataOutputStream(baos)){
-			// 写消息头：类型和之后内容的字节数
-			dos.writeInt(getType().ordinal());
-			return toBytesImpl(baos, dos);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+	public abstract byte[] toBytes();
 	
-	protected abstract byte[] toBytesImpl(ByteArrayOutputStream baos, DataOutputStream dos)  throws IOException;
-
 	public int getX() {
 		return x;
 	}

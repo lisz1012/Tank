@@ -24,12 +24,18 @@ public class TankChangeDirMessage extends Message {
 	}
 	
 	@Override
-	protected byte[] toBytesImpl(ByteArrayOutputStream baos, DataOutputStream dos) throws IOException {
-		dos.writeLong(id.getMostSignificantBits());
-		dos.writeLong(id.getLeastSignificantBits());
-		dos.writeInt(dir.ordinal());
-		dos.flush();
-		return baos.toByteArray();
+	public byte[] toBytes() {
+		try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		     DataOutputStream dos = new DataOutputStream(baos)){
+			dos.writeLong(id.getMostSignificantBits());
+			dos.writeLong(id.getLeastSignificantBits());
+			dos.writeInt(dir.ordinal());
+			dos.flush();
+			return baos.toByteArray();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override

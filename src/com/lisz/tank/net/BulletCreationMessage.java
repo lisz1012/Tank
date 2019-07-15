@@ -47,16 +47,22 @@ public class BulletCreationMessage extends Message {
 	}
 	
 	@Override
-	protected byte[] toBytesImpl(ByteArrayOutputStream baos, DataOutputStream dos) throws IOException{
-		dos.writeInt(x);
-		dos.writeInt(y);
-		dos.writeInt(dir.ordinal()); // 写下标值很方便，在网络传输方便
-		dos.writeBoolean(moving); // Boolean类型在网络传输只有一个字节
-		dos.writeInt(group.ordinal());
-		dos.writeLong(id.getMostSignificantBits());
-		dos.writeLong(id.getLeastSignificantBits());
-		dos.flush();
-		return baos.toByteArray();
+	public byte[] toBytes() {
+		try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			 DataOutputStream dos = new DataOutputStream(baos)){
+			dos.writeInt(x);
+			dos.writeInt(y);
+			dos.writeInt(dir.ordinal()); // 写下标值很方便，在网络传输方便
+			dos.writeBoolean(moving); // Boolean类型在网络传输只有一个字节
+			dos.writeInt(group.ordinal());
+			dos.writeLong(id.getMostSignificantBits());
+			dos.writeLong(id.getLeastSignificantBits());
+			dos.flush();
+			return baos.toByteArray();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override

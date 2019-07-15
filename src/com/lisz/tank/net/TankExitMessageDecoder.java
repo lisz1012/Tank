@@ -24,7 +24,8 @@ public class TankExitMessageDecoder extends ByteToMessageDecoder {
 	
 	@Override
 	public void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {//decode每个字节过来的时候触发一次
-		if (in.readableBytes() < TankExitMessage.SIZE) {
+		int size = in.readInt();
+		if (in.readableBytes() < size) {
 			return;
 		}
 		UUID id = new UUID(in.readLong(), in.readLong());

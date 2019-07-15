@@ -17,7 +17,11 @@ public class MessageEncoder extends MessageToByteEncoder<Message> {
 
 	@Override
 	protected void encode(ChannelHandlerContext ctx, Message msg, ByteBuf out) throws Exception {
-		out.writeBytes(msg.toBytes());
+		out.writeInt(msg.getType().ordinal());
+		byte[] bytes = msg.toBytes();
+		int length = bytes.length;
+		out.writeInt(length);
+		out.writeBytes(bytes);
 	}
 
 }
