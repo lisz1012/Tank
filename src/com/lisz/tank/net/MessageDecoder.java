@@ -8,13 +8,15 @@ import io.netty.handler.codec.ByteToMessageDecoder;
 public class MessageDecoder extends ByteToMessageDecoder {
 	private TankJoinMessageDecoder tankJoinMessageDecoder = new TankJoinMessageDecoder();
 	private BulletCreationMessageDecoder bulletCreationMessageDecoder = new BulletCreationMessageDecoder();
-
+	private TankExitMessageDecoder tankExitMessageDecoder = new TankExitMessageDecoder();
+	
 	@Override
 	protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
 		int type = in.readByte();
 		switch (type) {
 		case TankJoinMessage.TYPE: tankJoinMessageDecoder.decode(ctx, in, out); break;
 		case BulletCreationMessage.TYPE: bulletCreationMessageDecoder.decode(ctx, in, out); break;
+		case TankExitMessage.TYPE: tankExitMessageDecoder.decode(ctx, in, out); break;
 		default: break;
 		}
 	}

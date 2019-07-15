@@ -9,6 +9,7 @@ import com.lisz.tank.Dir;
 import com.lisz.tank.Group;
 import com.lisz.tank.Tank;
 
+// Also used to report tank status, including position and direction
 public class TankJoinMessage extends Message {
 	public static final byte TYPE = 0;
 	public static final int SIZE = 33;

@@ -44,11 +44,11 @@ public class Client {
 		f.channel().writeAndFlush(buf);
 	}
 	
-	public void send(Message msg) {
-		if (f== null) {
-			return;
+	public ChannelFuture send(Message msg) {
+		if (f == null) {
+			return null;
 		}
-		f.channel().writeAndFlush(msg);
+		return f.channel().writeAndFlush(msg);
 	}
 	
 	public static Client getInstance() {
