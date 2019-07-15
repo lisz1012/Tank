@@ -13,7 +13,7 @@ import io.netty.channel.ChannelHandlerContext;
 
 public class TankChangeDirMessage extends Message {
 	public static final int SIZE = 20;
-	public static final byte TYPE = 4;
+	public static final MessageType TYPE = MessageType.TANK_CHANGE_DIR;
 	
 	private UUID id;
 	private Dir dir;
@@ -33,7 +33,7 @@ public class TankChangeDirMessage extends Message {
 	}
 
 	@Override
-	public byte getType() {
+	public MessageType getType() {
 		return TYPE;
 	}
 

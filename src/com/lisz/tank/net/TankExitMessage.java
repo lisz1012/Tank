@@ -11,7 +11,7 @@ import io.netty.channel.ChannelHandlerContext;
 
 public class TankExitMessage extends Message {
 	public static final int SIZE = 16;
-	public static final byte TYPE = 2;
+	public static final MessageType TYPE = MessageType.TANK_EXIT;
 	
 	public TankExitMessage(UUID id){
 		this.id = id;
@@ -26,7 +26,7 @@ public class TankExitMessage extends Message {
 	}
 
 	@Override
-	public byte getType() {
+	public MessageType getType() {
 		return TYPE;
 	}
 

@@ -12,7 +12,7 @@ import io.netty.channel.ChannelHandlerContext;
 
 public class TankMovingMessage extends Message {
 	public static final int SIZE = 17;
-	public static final byte TYPE = 3;
+	public static final MessageType TYPE = MessageType.TANK_MOVING;
 	
 	private UUID id;
 	private boolean moving;
@@ -32,7 +32,7 @@ public class TankMovingMessage extends Message {
 	}
 
 	@Override
-	public byte getType() {
+	public MessageType getType() {
 		return TYPE;
 	}
 

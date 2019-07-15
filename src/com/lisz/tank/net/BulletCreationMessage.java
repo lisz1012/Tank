@@ -14,7 +14,7 @@ import io.netty.channel.ChannelHandlerContext;
 
 public class BulletCreationMessage extends Message {
 	public static final int SIZE = 33;
-	public static final byte TYPE = 1;
+	public static final MessageType TYPE = MessageType.BULLET_CREATION;
 
 	public BulletCreationMessage(Bullet b){
 		x = b.getX();
@@ -37,7 +37,7 @@ public class BulletCreationMessage extends Message {
 	public BulletCreationMessage() {}
 
 	@Override
-	public byte getType() {
+	public MessageType getType() {
 		return TYPE;
 	}
 

@@ -26,7 +26,7 @@ public abstract class Message {
 		try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			 DataOutputStream dos = new DataOutputStream(baos)){
 			// 写消息头：类型和之后内容的字节数
-			dos.writeByte(getType());
+			dos.writeInt(getType().ordinal());
 			return toBytesImpl(baos, dos);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -84,7 +84,7 @@ public abstract class Message {
 		this.id = id;
 	}
 
-	public abstract byte getType();
+	public abstract MessageType getType();
 	
 	public abstract int getSize();
 	

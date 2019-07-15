@@ -15,7 +15,7 @@ import io.netty.channel.ChannelHandlerContext;
 
 // Also used to report tank status, including position and direction
 public class TankJoinMessage extends Message {
-	public static final byte TYPE = 0;
+	public static final MessageType TYPE = MessageType.TANK_JOIN;
 	public static final int SIZE = 33;
 	
 	public TankJoinMessage(Tank t){
@@ -39,7 +39,7 @@ public class TankJoinMessage extends Message {
 	public TankJoinMessage() {}
 	
 	@Override
-	public byte getType() {
+	public MessageType getType() {
 		return TYPE;
 	}
 	@Override

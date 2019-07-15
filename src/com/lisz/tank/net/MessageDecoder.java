@@ -1,6 +1,9 @@
 package com.lisz.tank.net;
 
 import java.util.List;
+
+import com.lisz.tank.Dir;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
@@ -24,13 +27,13 @@ public class MessageDecoder extends ByteToMessageDecoder {
 	
 	@Override
 	protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
-		int type = in.readByte();
+		MessageType type = MessageType.values()[in.readInt()];
 		switch (type) {
-		case TankJoinMessage.TYPE: TANK_JOIN_MESSAGE_DECODER.decode(ctx, in, out); break;
-		case BulletCreationMessage.TYPE: BULLET_CREATION_MESSAGE_DECODER.decode(ctx, in, out); break;
-		case TankExitMessage.TYPE: TANK_EXIT_MESSAGE_DECODER.decode(ctx, in, out); break;
-		case TankMovingMessage.TYPE: TANK_MOVING_MESSAGE_DECODER.decode(ctx, in, out); break;
-		case TankChangeDirMessage.TYPE: TANK_CHANGE_DIR_MESSAGE_DECODER.decode(ctx, in, out); break;
+		case TANK_JOIN: TANK_JOIN_MESSAGE_DECODER.decode(ctx, in, out); break;
+		case BULLET_CREATION: BULLET_CREATION_MESSAGE_DECODER.decode(ctx, in, out); break;
+		case TANK_EXIT: TANK_EXIT_MESSAGE_DECODER.decode(ctx, in, out); break;
+		case TANK_MOVING: TANK_MOVING_MESSAGE_DECODER.decode(ctx, in, out); break;
+		case TANK_CHANGE_DIR: TANK_CHANGE_DIR_MESSAGE_DECODER.decode(ctx, in, out); break;
 		default: break;
 		}
 	}
