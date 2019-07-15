@@ -8,6 +8,8 @@ import java.util.UUID;
 import com.lisz.tank.Dir;
 import com.lisz.tank.Group;
 
+import io.netty.channel.ChannelHandlerContext;
+
 public abstract class Message {
 	protected int x, y;
 	protected Dir dir;
@@ -85,6 +87,9 @@ public abstract class Message {
 	public abstract byte getType();
 	
 	public abstract int getSize();
+	
+	
+	public abstract void handle(ChannelHandlerContext ctx);
 	
 	@Override
 	public String toString() {

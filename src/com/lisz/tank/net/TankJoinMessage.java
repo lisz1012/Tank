@@ -6,8 +6,12 @@ import java.io.IOException;
 import java.util.UUID;
 
 import com.lisz.tank.Dir;
+import com.lisz.tank.GameFacade;
 import com.lisz.tank.Group;
 import com.lisz.tank.Tank;
+import com.lisz.tank.TankFrame;
+
+import io.netty.channel.ChannelHandlerContext;
 
 // Also used to report tank status, including position and direction
 public class TankJoinMessage extends Message {
@@ -54,6 +58,19 @@ public class TankJoinMessage extends Message {
 		dos.writeLong(id.getLeastSignificantBits());
 		dos.flush();
 		return baos.toByteArray();
+	}
+
+	@Override
+	public void handle(ChannelHandlerContext ctx) {
+		Tank tank = new Tank(x, y, dir, group, moving);
+		tank.setId(id);
+		if (!GameFacade.getInstance().gameObjects.containsKey(tank.getId())) {
+			GameFacade.getInstance().gameObjects.put(tank.getId(), tank);
+			System.out.println("New tank: " + tank);
+			ctx.writeAndFlush(new TankJoinMessage(TankFrame.tank));
+		} else {
+			GameFacade.getInstance().gameObjects.put(tank.getId(), tank);
+		}
 	}
 	
 }

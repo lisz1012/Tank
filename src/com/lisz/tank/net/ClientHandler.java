@@ -1,8 +1,5 @@
 package com.lisz.tank.net;
 
-import com.lisz.tank.Bullet;
-import com.lisz.tank.GameFacade;
-import com.lisz.tank.Tank;
 import com.lisz.tank.TankFrame;
 
 import io.netty.channel.ChannelHandlerContext;
@@ -21,27 +18,8 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 	
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {//ctx代表Channel目前运行的网络环境
-		System.out.println("Type: " + msg.getClass().getName());
 		try {
-			if (msg instanceof TankJoinMessage) {
-				TankJoinMessage message = (TankJoinMessage)msg;
-				Tank tank = new Tank(message.getX(), message.getY(), message.getDir(), message.getGroup(), message.isMoving());
-				tank.setId(message.getId());
-				if (!GameFacade.getInstance().gameObjects.containsKey(tank.getId())) {
-					GameFacade.getInstance().gameObjects.put(tank.getId(), tank);
-					System.out.println("New tank: " + tank);
-					ctx.writeAndFlush(new TankJoinMessage(TankFrame.tank));
-				} else {
-					GameFacade.getInstance().gameObjects.put(tank.getId(), tank);
-				}
-			} else if (msg instanceof BulletCreationMessage) {
-				BulletCreationMessage message = (BulletCreationMessage) msg;
-				Bullet bullet = new Bullet(message.getDir(), message.getX(), message.getY(), message.getGroup());
-				GameFacade.getInstance().gameObjects.put(bullet.getId(), bullet);
-			} else if (msg instanceof TankExitMessage) {
-				TankExitMessage message = (TankExitMessage)msg;
-				GameFacade.getInstance().gameObjects.remove(message.getId());
-			}
+			((Message)msg).handle(ctx);
 		} finally {
 			ReferenceCountUtil.release(msg);
 		}

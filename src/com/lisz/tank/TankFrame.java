@@ -40,7 +40,6 @@ public class TankFrame extends Frame {
 				// 给其他玩家客户端发送离开消息，以便他们从他们的gameObjects中去除本玩家的tank
 				try {
 					Client.getInstance().send(new TankExitMessage(tank.id)).sync();
-					System.out.println("Exit message sent!");
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}

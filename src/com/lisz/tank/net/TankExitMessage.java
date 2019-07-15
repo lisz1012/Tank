@@ -5,6 +5,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
+import com.lisz.tank.GameFacade;
+
+import io.netty.channel.ChannelHandlerContext;
+
 public class TankExitMessage extends Message {
 	public static final int SIZE = 16;
 	public static final byte TYPE = 2;
@@ -29,6 +33,11 @@ public class TankExitMessage extends Message {
 	@Override
 	public int getSize() {
 		return SIZE;
+	}
+
+	@Override
+	public void handle(ChannelHandlerContext ctx) {
+		GameFacade.getInstance().gameObjects.remove(id);
 	}
 
 }

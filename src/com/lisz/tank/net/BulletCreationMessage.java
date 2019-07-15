@@ -7,7 +7,10 @@ import java.util.UUID;
 
 import com.lisz.tank.Bullet;
 import com.lisz.tank.Dir;
+import com.lisz.tank.GameFacade;
 import com.lisz.tank.Group;
+
+import io.netty.channel.ChannelHandlerContext;
 
 public class BulletCreationMessage extends Message {
 	public static final int SIZE = 33;
@@ -54,5 +57,11 @@ public class BulletCreationMessage extends Message {
 		dos.writeLong(id.getLeastSignificantBits());
 		dos.flush();
 		return baos.toByteArray();
+	}
+
+	@Override
+	public void handle(ChannelHandlerContext ctx) {
+		Bullet bullet = new Bullet(dir, x, y, group);
+		GameFacade.getInstance().gameObjects.put(bullet.getId(), bullet);
 	}
 }
