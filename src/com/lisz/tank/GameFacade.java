@@ -10,6 +10,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -23,7 +25,8 @@ public class GameFacade {
 	//private static final int INIT_X = PropertyMgr.getInt("initX");
 	//private static final int INIT_Y = PropertyMgr.getInt("initY");
 	private static final List<Wall> WALLS = PropertyMgr.getWalls();
-	private static final List<UUID> OBJECTS_TO_BE_REMOVED = new ArrayList<>();
+	private List<GameObject> gameObjectList;
+	//private static final Set<UUID> OBJECTS_TO_BE_REMOVED = new HashSet<>();
 	//private Tank tank = new Tank(INIT_X, INIT_Y, Dir.UP, this, Group.GOOD, PropertyMgr.getCannon("goodCannon"));
 	private Tank tank = createTank();
 	public Map<UUID, GameObject> gameObjects = new HashMap<>();//new HashSet<>();
@@ -60,38 +63,46 @@ public class GameFacade {
 		g.drawString("Object的数量" + gameObjects.size(), 10, 60);
 		g.setColor(c);
 		
-		/*for (int i = 0; i < gameObjects.size(); i++) {
-			GameObject gameObject = gameObjects.get(i);
-			for (int j = i + 1; j < gameObjects.size(); j++) {
-				GameObject other = gameObjects.get(j);
+		gameObjectList = new ArrayList<>(gameObjects.values());
+		for (int i = 0; i < gameObjectList.size(); i++) {
+			GameObject gameObject = gameObjectList.get(i);
+			for (int j = i + 1; j < gameObjectList.size(); j++) {
+				GameObject other = gameObjectList.get(j);
 				chain.collide(gameObject, other);
 			}
-		}*/
+		}
 		
-		for (GameObject o1 : gameObjects.values()) {
+		/*for (GameObject o1 : gameObjects.values()) {
 			for (GameObject o2 : gameObjects.values()) {
 				if (o1 != o2) {
 					chain.collide(o1, o2);
 				}
 			}
-		}
-		
-		/*for (int i = gameObjects.size() - 1; i >= 0; i--) {
-			if (!gameObjects.get(i).isLive()) {
-				gameObjects.remove(i);
-			}
 		}*/
 		
-		for (GameObject o : gameObjects.values()) {
+		for (int i = gameObjectList.size() - 1; i >= 0; i--) {
+			if (!gameObjectList.get(i).isLive()) {
+				gameObjects.remove(gameObjectList.get(i).getId());
+			}
+		}
+		
+		/*for (GameObject o : gameObjects.values()) {
 			if (!o.isLive()) {
 				OBJECTS_TO_BE_REMOVED.add(o.getId());
 			}
-		}
+		}*/
 		
-		for (UUID id : OBJECTS_TO_BE_REMOVED) {
+		/*Iterator<Map.Entry<UUID, GameObject>> it = gameObjects.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<UUID, GameObject> entry = it.next();
+			if (!entry.getValue().live) {
+				it.remove();
+			}
+		}*/
+		/*for (UUID id : OBJECTS_TO_BE_REMOVED) {
 			gameObjects.remove(id);
 		}
-		OBJECTS_TO_BE_REMOVED.clear();
+		OBJECTS_TO_BE_REMOVED.clear();*/
 		
 		
 		

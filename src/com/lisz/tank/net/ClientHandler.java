@@ -39,7 +39,6 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 				ReferenceCountUtil.release(msg);
 			}
 		} else if (msg instanceof BulletCreationMessage) {
-			System.out.println("Other tank shot!");
 			try {
 				BulletCreationMessage message = (BulletCreationMessage) msg;
 				Bullet bullet = new Bullet(message.getDir(), message.getX(), message.getY(), message.getGroup());

@@ -10,6 +10,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import com.lisz.tank.net.Client;
+import com.lisz.tank.net.TankJoinMessage;
 
 
 public class TankFrame extends Frame {
@@ -94,9 +95,14 @@ public class TankFrame extends Frame {
 			case KeyEvent.VK_LEFT:
 			case KeyEvent.VK_RIGHT:
 				if (!tank.isLive()) return;
+				boolean origMoving = tank.moving;
+				Dir origDir = tank.dir;
 				setDirKeyPressedStatus(e, true);
 				Dir dir = calculateDir();
 				tank.setDir(dir);
+				if (tank.moving != origMoving || tank.dir != origDir) { //计算完了，只要是方向和开动状态有一个变了，就发消息，更新
+					Client.getInstance().send(new TankJoinMessage(tank));
+				}
 				if (tank.isMoving()) {
 					new Thread(()->new Audio("audio/tank_move.wav").play()).start();
 				}
@@ -136,10 +142,16 @@ public class TankFrame extends Frame {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
+			boolean origMoving = tank.moving;
+			Dir origDir = tank.dir;
 			setDirKeyPressedStatus(e, false);
 			Dir dir = calculateDir();
 			tank.setDir(dir);
+			if (tank.moving != origMoving || tank.dir != origDir) {//计算完了，只要是方向和开动状态有一个变了，就发消息，更新
+				Client.getInstance().send(new TankJoinMessage(tank));
+			}
 			setTankFire(e);
+			
 			/*switch (e.getKeyCode()) {
 			case KeyEvent.VK_G:
 				facade.generateEnemies(ENEMY_COUNT);

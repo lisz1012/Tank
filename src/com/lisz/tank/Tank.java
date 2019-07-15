@@ -97,6 +97,10 @@ public class Tank extends GameObject {
 	@Override
 	public void setDir(Dir dir) {
 		if (!live) return;
+		/*if (this.dir != dir) {
+			this.dir = dir;
+			Client.getInstance().send(new TankJoinMessage(this));
+		}*/
 		this.dir = dir;
 	}
 	
@@ -121,9 +125,10 @@ public class Tank extends GameObject {
 	@Override
 	public void setMoving(boolean moving) {
 		if (!live) return;
-		if (this.moving != moving) {
+		/*if (this.moving != moving) {
+			this.moving = moving;
 			Client.getInstance().send(new TankJoinMessage(this));
-		}
+		}*/
 		this.moving = moving;
 	}
 
