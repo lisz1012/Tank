@@ -29,8 +29,10 @@ public class TankMovingMessageDecoder extends ByteToMessageDecoder {
 			return;
 		}
 		UUID id = new UUID(in.readLong(), in.readLong());
+		int x = in.readInt();
+		int y = in.readInt();
 		boolean moving = in.readBoolean();
-		TankMovingMessage message = new TankMovingMessage(id, moving);
+		TankMovingMessage message = new TankMovingMessage(id, x, y, moving);
 		out.add(message);
 	}
 

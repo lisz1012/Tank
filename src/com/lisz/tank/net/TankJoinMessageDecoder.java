@@ -30,6 +30,7 @@ public class TankJoinMessageDecoder extends ByteToMessageDecoder {
 	public void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {//decode每个字节过来的时候触发一次
 		int size = in.readInt();
 		if (in.readableBytes() < size) {
+			in.resetReaderIndex();
 			return;
 		}
 		int x = in.readInt();

@@ -26,7 +26,17 @@ public class MessageDecoder extends ByteToMessageDecoder {
 	
 	@Override
 	protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
-		MessageType type = MessageType.values()[in.readInt()];
+		in.markReaderIndex();
+		if (in.readableBytes() < 8) {
+			return;
+		}
+		int index = in.readInt();
+		// 运行时间长了会读出一些奇怪的int，再往下会报错的，此时清理一下
+		if (index >= MessageType.values().length || index < 0) {
+			in.clear();
+			return;
+		}
+		MessageType type = MessageType.values()[index];
 		switch (type) {
 		case TANK_JOIN: TANK_JOIN_MESSAGE_DECODER.decode(ctx, in, out); break;
 		case BULLET_CREATION: BULLET_CREATION_MESSAGE_DECODER.decode(ctx, in, out); break;
@@ -35,6 +45,8 @@ public class MessageDecoder extends ByteToMessageDecoder {
 		case TANK_CHANGE_DIR: TANK_CHANGE_DIR_MESSAGE_DECODER.decode(ctx, in, out); break;
 		default: break;
 		}
+		//in.resetReaderIndex();
+		in.clear();
 	}
 
 }

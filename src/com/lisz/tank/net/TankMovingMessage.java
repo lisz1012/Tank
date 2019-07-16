@@ -14,10 +14,14 @@ public class TankMovingMessage extends Message {
 	public static final MessageType TYPE = MessageType.TANK_MOVING;
 	
 	private UUID id;
+	private int x;
+	private int y;
 	private boolean moving;
 	
-	public TankMovingMessage(UUID id, boolean moving) {
+	public TankMovingMessage(UUID id, int x, int y, boolean moving) {
 		this.id = id;
+		this.x = x;
+		this.y = y;
 		this.moving = moving;
 	}
 	
@@ -27,6 +31,8 @@ public class TankMovingMessage extends Message {
 			 DataOutputStream dos = new DataOutputStream(baos)){
 			dos.writeLong(id.getMostSignificantBits());
 			dos.writeLong(id.getLeastSignificantBits());
+			dos.writeInt(x);
+			dos.writeInt(y);
 			dos.writeBoolean(moving);
 			dos.flush();
 			return baos.toByteArray();	

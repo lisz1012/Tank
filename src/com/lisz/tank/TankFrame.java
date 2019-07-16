@@ -103,15 +103,16 @@ public class TankFrame extends Frame {
 				setDirKeyPressedStatus(e, true);
 				Dir dir = calculateDir();
 				tank.setDir(dir);
-				/*if (tank.moving != origMoving || tank.dir != origDir) { //计算完了，只要是方向和开动状态有一个变了，就发消息，更新
+				if (tank.moving != origMoving || tank.dir != origDir) { //计算完了，只要是方向和开动状态有一个变了，就发消息，更新
 					Client.getInstance().send(new TankJoinMessage(tank));
-				}*/
-				if (tank.dir != origDir) {
+				}
+				// 注释掉下面的，合并消息类型为TankJoinMessage，不要过于密集的发消息，否则按键快的时候要么发不出去，要么收不到，导致不同步
+				/*if (tank.dir != origDir) {
 					Client.getInstance().send(new TankChangeDirMessage(tank.id, tank.dir));
 				}
 				if (tank.moving != origMoving) { //计算完了，只要是方向和开动状态有一个变了，就发消息，更新
-					Client.getInstance().send(new TankMovingMessage(tank.id, tank.moving));
-				}
+					Client.getInstance().send(new TankMovingMessage(tank.getId(), tank.getX(), tank.getY(), tank.isMoving()));
+				}*/
 				if (tank.isMoving()) {
 					new Thread(()->new Audio("audio/tank_move.wav").play()).start();
 				}
