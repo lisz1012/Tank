@@ -2,12 +2,11 @@ package com.lisz.tank.net;
 
 import java.util.List;
 
-import com.lisz.tank.Dir;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 
+//每次添加新的消息类型，要加：消息类和相应的Decoder，Encoder发字节数组，很底层，各种消息都一样，无需另外添加
 public class MessageDecoder extends ByteToMessageDecoder {
 	private static final TankJoinMessageDecoder TANK_JOIN_MESSAGE_DECODER = TankJoinMessageDecoder.getInstance();
 	private static final BulletCreationMessageDecoder BULLET_CREATION_MESSAGE_DECODER = BulletCreationMessageDecoder.getInstance();
