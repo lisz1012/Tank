@@ -25,7 +25,7 @@ public class Server {
 		ServerBootstrap b = new ServerBootstrap();
 		b.group(bossGroup, workerGroup)
 		 .channel(NioServerSocketChannel.class)
-		 .option(ChannelOption.TCP_NODELAY, true) // 禁用Nagle算法防止卡顿和收包不及时
+		 .option(ChannelOption.TCP_NODELAY, true) // 禁用Nagle算法防止卡顿和收包不及时，但当前netty版本会报：WARNING: Unknown channel option 'TCP_NODELAY' for channel '[id: 0x74d2b9d3]'
 		 .childHandler(new ChannelInitializer<SocketChannel>() {
 			@Override
 			protected void initChannel(SocketChannel ch) throws Exception {
